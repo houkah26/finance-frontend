@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import registerServiceWorker from "./registerServiceWorker";
 
-import App from './components/App';
+import App from "./components/app";
 
-const rootEl = document.getElementById('root');
+const rootEl = document.getElementById("root");
 
-ReactDOM.render(<App/>, rootEl);
+ReactDOM.render(<App />, rootEl);
 
 if (module.hot) {
-  module.hot.accept('./components/App', () => {
-    ReactDOM.render(<App />, rootEl)
-  })
+  module.hot.accept("./components/app", () => {
+    ReactDOM.render(<App />, rootEl);
+  });
 }
 
 registerServiceWorker();
