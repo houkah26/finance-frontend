@@ -2,7 +2,6 @@ import {
   AUTH_USER,
   UNAUTH_USER,
   ERROR,
-  PROTECTED_TEST,
   UPDATE_USER,
   CLEAR_ERROR
 } from "../actions/types";
@@ -22,8 +21,6 @@ export default function(state = INITIAL_STATE, action) {
       return { ...INITIAL_STATE };
     case ERROR:
       return { ...state, error: action.payload };
-    case PROTECTED_TEST:
-      return { ...state, content: action.payload };
     case UPDATE_USER:
       return { ...state, user: action.user, error: "" };
     case CLEAR_ERROR:

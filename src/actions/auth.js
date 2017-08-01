@@ -4,7 +4,7 @@ import { push } from "react-router-redux";
 
 import errorHandler from "./errorHandler";
 
-import { AUTH_USER, ERROR, UNAUTH_USER, PROTECTED_TEST } from "./types";
+import { AUTH_USER, ERROR, UNAUTH_USER } from "./types";
 import { API_URL } from "../constants";
 
 //= =====================
@@ -47,24 +47,6 @@ export function logoutUser() {
     cookie.remove("token", { path: "/" });
 
     dispatch(push("/login"));
-  };
-}
-
-export function protectedTest() {
-  return function(dispatch) {
-    axios
-      .get(`${API_URL}/protected`, {
-        headers: { Authorization: cookie.load("token") }
-      })
-      .then(response => {
-        dispatch({
-          type: PROTECTED_TEST,
-          payload: response.data.content
-        });
-      })
-      .catch(error => {
-        errorHandler(dispatch, error.response, ERROR);
-      });
   };
 }
 
