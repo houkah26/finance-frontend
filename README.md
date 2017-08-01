@@ -30,4 +30,9 @@ User interface to consume [backend API](https://github.com/houkah26/finance-back
 * Graphs for stock information
 * Improve error handeling
 * Buy stock form: clear calculated price on form change
+* Seperate API file/folder
+* List component
+* Update Footer
+* Add content to homepage
+* Header title
 
