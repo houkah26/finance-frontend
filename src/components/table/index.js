@@ -51,7 +51,7 @@ export default class TableSortable extends Component {
     const { tableHeaders } = this.props;
 
     return (
-      <Table sortable celled fixed striped>
+      <Table sortable celled striped unstackable>
         <Table.Header>
           <Table.Row>
             {tableHeaders.map(header =>
