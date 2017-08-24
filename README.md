@@ -22,17 +22,11 @@ User interface to consume [backend API](https://github.com/houkah26/finance-back
 * Bootstrapped with Create-React-App
 
 ## TO-DO
-* Prop-Types / Flow
-* Improve responsivene/mobile layout
+* Add Prop-Types (In progress)
 * Pagination for history
 * Filter table for portfolio/history
-* Seperate route file
 * Graphs for stock information
 * Improve error handeling
-* Buy stock form: clear calculated price on form change
 * Seperate API file/folder
 * List component
-* Update Footer
-* Add content to homepage
-* Header title
 
