@@ -29,7 +29,11 @@ const NavBar = ({
       {itemsToRender.map(item =>
         <NavBarMenuItem
           {...item}
-          onClick={!item.header && (() => item.onClick(item.route))}
+          onClick={
+            typeof item.onClick === "function"
+              ? () => item.onClick(item.route)
+              : undefined
+          }
           active={activeItem === item.route}
           key={item.route || item.content}
           collapsed={collapsed}
