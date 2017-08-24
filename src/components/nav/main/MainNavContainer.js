@@ -37,6 +37,12 @@ class NavMenu extends Component {
     this.props.changeRoute(route);
   };
 
+  toggleCollapse = () => {
+    this.setState({
+      collapsed: !this.state.collapsed
+    });
+  };
+
   handleMenuClick = route => {
     const { activeItem } = this.props;
 
@@ -44,15 +50,12 @@ class NavMenu extends Component {
       this.navToRoute(route);
     }
 
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
+    this.toggleCollapse();
   };
 
   handleLogoutClick = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
+    this.toggleCollapse();
+
     this.props.logoutUser();
   };
 
