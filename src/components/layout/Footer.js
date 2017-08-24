@@ -7,7 +7,7 @@ const NewTabLink = ({ url, children }) =>
   </a>;
 
 const Footer = () =>
-  <div className="footer">
+  <div className="layout-footer">
     <Header size="small" textAlign="center">
       Brought to you by{" "}
       <NewTabLink url="https://github.com/houkah26">Austin Houk</NewTabLink> |{" "}
