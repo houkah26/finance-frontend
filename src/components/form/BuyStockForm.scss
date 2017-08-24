@@ -1,0 +1,9 @@
+.buy-stock-form > form {
+  > .success-message {
+    display: flex;
+
+    > span {
+      align-self: center;
+    }
+  }
+}

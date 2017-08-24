@@ -14,6 +14,8 @@ import { API_URL } from "../../constants";
 
 import renderFields from "./renderFields";
 
+import "./BuyStockForm.css";
+
 // Input fields to render
 const inputFields = [
   { name: "stockSymbol", type: "text" },
@@ -100,7 +102,7 @@ class BuyStockForm extends Component {
     const buyContainsError = buyErrorMessage.length > 0;
 
     return (
-      <div>
+      <div className="buy-stock-form">
         <Header size="medium">Buy Stock:</Header>
         <Form
           error={quoteContainsError}
@@ -114,15 +116,23 @@ class BuyStockForm extends Component {
             Calculate Transaction Cost
           </Form.Button>
           <Message error content={quoteErrorMessage} />
-          <Message success>
-            {`${numShares} shares of ${quoteSymbol} costs $${totalCost}.`}
+          <Message className="success-message" success>
+            <span
+              style={{ alginSelf: "center" }}
+            >{`${numShares} shares of ${quoteSymbol} costs $${totalCost}.`}</span>
+            {isSuccesfull &&
+              <Button
+                size="mini"
+                positive
+                compact
+                floated="right"
+                onClick={this.handlePurchaseClick}
+              >
+                Purchase
+              </Button>}
           </Message>
         </Form>
         <br />
-        {isSuccesfull &&
-          <Button color="green" onClick={this.handlePurchaseClick}>
-            Purchase Shares
-          </Button>}
         <Message error hidden={!buyContainsError}>
           {buyErrorMessage}
         </Message>
