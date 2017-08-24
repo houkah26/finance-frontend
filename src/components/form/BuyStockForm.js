@@ -118,7 +118,6 @@ class BuyStockForm extends Component {
           <Message error content={quoteErrorMessage} />
           <Message className="success-message" success>
             <span
-              style={{ alginSelf: "center" }}
             >{`${numShares} shares of ${quoteSymbol} costs $${totalCost}.`}</span>
             {isSuccesfull &&
               <Button
