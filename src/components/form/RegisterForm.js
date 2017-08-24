@@ -58,7 +58,7 @@ class RegisterForm extends Component {
   };
 
   render() {
-    const { handleSubmit, errorMessage } = this.props;
+    const { handleSubmit, errorMessage, isLoading } = this.props;
     const containsError = errorMessage.length > 0;
 
     return (
@@ -76,7 +76,7 @@ class RegisterForm extends Component {
           component={Checkbox}
           label="I agree to the Terms and Conditions"
         />
-        <Form.Button>
+        <Form.Button loading={isLoading}>
           <Icon name="signup" />Register
         </Form.Button>
       </Form>
@@ -85,7 +85,7 @@ class RegisterForm extends Component {
 }
 
 const mapStateToProps = state => {
-  return { errorMessage: state.auth.error };
+  return { errorMessage: state.auth.error, isLoading: state.auth.isRequesting };
 };
 
 const createForm = reduxForm({

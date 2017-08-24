@@ -4,7 +4,7 @@ import { push } from "react-router-redux";
 
 import errorHandler from "./errorHandler";
 
-import { AUTH_USER, ERROR, UNAUTH_USER } from "./types";
+import { AUTH_USER, ERROR, UNAUTH_USER, IS_REQUESTING } from "./types";
 import { API_URL } from "../constants";
 
 //= =====================
@@ -12,6 +12,10 @@ import { API_URL } from "../constants";
 //= =====================
 export function loginUser({ username, password }) {
   return function(dispatch) {
+    dispatch({
+      type: IS_REQUESTING
+    });
+
     axios
       .post(`${API_URL}/auth/login`, { username, password })
       .then(response => {
@@ -25,6 +29,10 @@ export function loginUser({ username, password }) {
 
 export function registerUser({ username, firstName, lastName, password }) {
   return function(dispatch) {
+    dispatch({
+      type: IS_REQUESTING
+    });
+
     axios
       .post(`${API_URL}/auth/register`, {
         username,
