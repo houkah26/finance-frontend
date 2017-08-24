@@ -11,7 +11,7 @@ const Dashboard = () => {
   const responsiveLimit = 793;
 
   const renderResponsiveSegment = () =>
-    <MediaQuery minDeviceWidth={responsiveLimit}>
+    <MediaQuery minWidth={responsiveLimit}>
       {matches =>
         matches
           ? <Segment attached="bottom">

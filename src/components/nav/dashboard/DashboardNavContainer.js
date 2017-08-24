@@ -45,7 +45,7 @@ class NavMenu extends Component {
     const dropdownHeader = `Funds: $${cash}`;
 
     return (
-      <MediaQuery minDeviceWidth={793}>
+      <MediaQuery minWidth={793}>
         {matches =>
           matches
             ? <NavBar
