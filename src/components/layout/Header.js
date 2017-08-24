@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import NavMenu from '../nav/main/NavMenu'
+import NavMenu from "../nav/main/index";
 
 const Header = () =>
   <div className="layout-header">
     <NavMenu />
-  </div>
-)
+  </div>;
 
 export default Header;

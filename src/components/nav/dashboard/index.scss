@@ -1,0 +1,23 @@
+.dashboard-nav-menu {
+  &.nav-bar {
+    > .item {
+      font-weight: bolder !important;
+    }
+
+    > .item.header {
+      text-decoration: underline !important;
+    }
+  }
+
+  &.nav-dropdown {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    > .dropdown-menu-header {
+      font-size: 1.1rem;
+      font-weight: bolder;
+      text-decoration: underline;
+    }
+  }
+}

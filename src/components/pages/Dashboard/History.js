@@ -61,11 +61,7 @@ export default class History extends Component {
   };
 
   render() {
-    return (
-      <div>
-        {this.renderHistory()}
-      </div>
-    );
+    return this.renderHistory();
   }
 }
 

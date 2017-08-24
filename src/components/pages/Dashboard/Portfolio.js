@@ -52,7 +52,7 @@ export default class Portfolio extends Component {
       });
   };
 
-  renderPortfolio = () => {
+  render() {
     const { portfolio, totalValue } = this.state;
     const tableFooter = [null, null, null, "Total", totalValue];
 
@@ -69,14 +69,6 @@ export default class Portfolio extends Component {
         />
       );
     }
-  };
-
-  render() {
-    return (
-      <div>
-        {this.renderPortfolio()}
-      </div>
-    );
   }
 }
 

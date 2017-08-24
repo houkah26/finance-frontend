@@ -1,0 +1,15 @@
+.dashboard-content-container {
+  overflow-x: auto;
+  padding-top: 1rem !important;
+
+  > .ui.stackable.divided.two.column.grid {
+    > .column {
+      padding-top: 0.5rem !important;
+      padding-bottom: 0.5rem !important;
+    }
+  }
+
+  > .buy-stock-container {
+    overflow-x: hidden;
+  }
+}

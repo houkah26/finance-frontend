@@ -51,11 +51,7 @@ export default class SellStock extends Component {
   };
 
   render() {
-    return (
-      <div>
-        {this.renderSellStockForm()}
-      </div>
-    );
+    return this.renderSellStockForm();
   }
 }
 
