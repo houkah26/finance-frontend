@@ -37,7 +37,7 @@ class NavMenu extends Component {
     this.props.changeRoute(route);
   };
 
-  handleMenuClick = (e, { name: route }) => {
+  handleMenuClick = route => {
     const { activeItem } = this.props;
 
     if (activeItem !== route) {

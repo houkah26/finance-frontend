@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { kebabCase, camelCase, round } from "lodash";
+import { round } from "lodash";
 import MediaQuery from "react-responsive";
 import PropTypes from "prop-types";
 
@@ -17,10 +17,7 @@ class NavMenu extends Component {
     className: PropTypes.string
   };
 
-  navToRoute = (e, data) => {
-    const name = data.name || data.text;
-    // convert name to dash case (ie. add-funds)
-    const route = kebabCase(name);
+  navToRoute = route => {
     this.props.changeRoute(`/dashboard/${route}`);
   };
 
@@ -28,16 +25,20 @@ class NavMenu extends Component {
     const { className, activeItem, cash } = this.props;
 
     const itemsToRender = [
-      { name: "portfolio", onClick: this.navToRoute },
-      { name: "history", onClick: this.navToRoute },
-      { name: "buyStock", onClick: this.navToRoute },
-      { name: "sellStock", onClick: this.navToRoute },
-      { name: "addFunds", onClick: this.navToRoute },
-      { name: "userInfo", onClick: this.navToRoute, position: "right" },
+      { route: "portfolio", content: "Portfolio", onClick: this.navToRoute },
+      { route: "history", content: "History", onClick: this.navToRoute },
+      { route: "buy-stock", content: "Buy Stock", onClick: this.navToRoute },
+      { route: "sell-stock", content: "Sell Stock", onClick: this.navToRoute },
+      { route: "add-funds", content: "Add Funds", onClick: this.navToRoute },
       {
-        name: "funds",
+        route: "user-info",
+        content: "User Info",
+        onClick: this.navToRoute,
+        position: "right"
+      },
+      {
         header: true,
-        headerContent: `Cash Balance: $${cash}`
+        content: `Cash Balance: $${cash}`
       }
     ];
 
@@ -68,7 +69,7 @@ class NavMenu extends Component {
 const mapStateToProps = state => {
   return {
     // extract active item from path after /dashboard/ and convert to camelcase
-    activeItem: camelCase(state.router.location.pathname.slice(11)),
+    activeItem: state.router.location.pathname.slice(11),
     cash: round(state.auth.user.cash, 2).toFixed(2)
   };
 };

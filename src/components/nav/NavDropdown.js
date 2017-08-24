@@ -9,10 +9,10 @@ const NavDropdown = ({ itemsToRender, activeItem, className, header }) =>
       <Dropdown.Menu>
         {itemsToRender.map(item =>
           <Dropdown.Item
-            text={startCase(item.name)}
-            onClick={item.onClick}
-            active={activeItem === item.name}
-            key={item.name}
+            text={item.content}
+            onClick={() => item.onClick(item.route)}
+            active={activeItem === item.route}
+            key={item.route || item.content}
           />
         )}
       </Dropdown.Menu>
@@ -26,7 +26,8 @@ NavDropdown.propTypes = {
   activeItem: PropTypes.string.isRequired,
   itemsToRender: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      route: PropTypes.string,
       onClick: PropTypes.func,
       position: PropTypes.oneOf(["right"])
     })
