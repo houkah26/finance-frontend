@@ -37,11 +37,11 @@ class NavMenu extends Component {
     this.props.changeRoute(route);
   };
 
-  handleMenuClick = (e, { name }) => {
+  handleMenuClick = (e, { name: route }) => {
     const { activeItem } = this.props;
 
-    if (activeItem !== name) {
-      this.navToRoute(name);
+    if (activeItem !== route) {
+      this.navToRoute(route);
     }
 
     this.setState({
@@ -67,38 +67,43 @@ class NavMenu extends Component {
 
     const homepageItem = [
       {
-        name: "",
+        route: "",
+        content: "React Finance",
         icon: { name: "home", size: "large" },
         onClick: this.handleMenuClick
       }
     ];
     const isAuthItems = [
       {
-        name: "dashboard",
+        route: "dashboard",
+        content: "Dashboard",
         icon: { name: "browser", size: "large" },
         onClick: this.handleMenuClick
       },
       {
-        name: "username",
+        route: "username",
+        content: `Logged in as ${username}`,
         header: true,
-        position: "right",
-        headerContent: `Logged in as ${username}`
+        position: "right"
       },
       {
-        name: "logout",
+        route: "logout",
+        content: "Logout",
         icon: { name: "sign out", size: "large" },
         onClick: this.handleLogoutClick
       }
     ];
     const notAuthItems = [
       {
-        name: "register",
+        route: "register",
+        content: "Register",
         icon: { name: "signup", size: "large" },
         onClick: this.handleMenuClick,
         position: "right"
       },
       {
-        name: "login",
+        route: "login",
+        content: "Login",
         icon: { name: "sign in", size: "large" },
         onClick: this.handleMenuClick
       }

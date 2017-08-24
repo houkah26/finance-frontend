@@ -1,11 +1,11 @@
 import React from "react";
 import { startCase } from "lodash";
-import { Dropdown } from "semantic-ui-react";
+import { Dropdown, Menu } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
 const NavDropdown = ({ itemsToRender, activeItem, className, header }) =>
-  <div className={"nav-dropdown " + className}>
-    <Dropdown text={startCase(activeItem)} labeled button className={"icon"}>
+  <Menu className={"nav-dropdown " + className}>
+    <Dropdown text={startCase(activeItem)} pointing className={"link item"}>
       <Dropdown.Menu>
         {itemsToRender.map(item =>
           <Dropdown.Item
@@ -17,10 +17,10 @@ const NavDropdown = ({ itemsToRender, activeItem, className, header }) =>
         )}
       </Dropdown.Menu>
     </Dropdown>
-    <span className="dropdown-menu-header">
+    <Menu.Item header position="right">
       {header}
-    </span>
-  </div>;
+    </Menu.Item>
+  </Menu>;
 
 NavDropdown.propTypes = {
   activeItem: PropTypes.string.isRequired,

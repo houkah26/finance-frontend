@@ -14,32 +14,36 @@ const NavBar = ({
   inverted = false,
   size = null,
   collapsed = false
-}) =>
-  <Menu
-    tabular={tabular}
-    attached={attached}
-    stackable={stackable}
-    inverted={inverted}
-    size={size}
-    className={"nav-bar " + className}
-  >
-    {itemsToRender.map(item =>
-      <NavBarMenuItem
-        {...item}
-        active={activeItem === item.name}
-        key={item.name}
-        collapsed={collapsed}
-        tabular
-        attached
-      />
-    )}
-  </Menu>;
+}) => {
+  const collapsedClass = collapsed ? "collapse" : "";
+
+  return (
+    <Menu
+      tabular={tabular}
+      attached={attached}
+      stackable={stackable}
+      inverted={inverted}
+      size={size}
+      className={`nav-bar ${className} ${collapsedClass}`}
+    >
+      {itemsToRender.map(item =>
+        <NavBarMenuItem
+          {...item}
+          active={activeItem === item.route}
+          key={item.route}
+          collapsed={collapsed}
+        />
+      )}
+    </Menu>
+  );
+};
 
 NavBar.propTypes = {
   activeItem: PropTypes.string.isRequired,
   itemsToRender: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
+      content: PropTypes.string,
+      route: PropTypes.string,
       onClick: PropTypes.func,
       icon: PropTypes.shape({
         name: PropTypes.string,
@@ -54,9 +58,7 @@ NavBar.propTypes = {
         ])
       }),
       position: PropTypes.oneOf(["right"]),
-      shouldRender: PropTypes.bool,
       header: PropTypes.bool,
-      headerContent: PropTypes.string,
       collapsed: PropTypes.bool
     })
   ),
