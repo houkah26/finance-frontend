@@ -21,10 +21,9 @@
     justify-content: space-between;
     align-items: flex-end;
 
-    > .dropdown-menu-header {
+    > .dropdown > .text {
       font-size: 1.1rem;
       font-weight: bolder;
-      text-decoration: underline;
     }
   }
 }
