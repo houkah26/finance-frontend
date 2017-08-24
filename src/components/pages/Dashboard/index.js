@@ -23,7 +23,7 @@ const Dashboard = () => {
     </MediaQuery>;
 
   return (
-    <div>
+    <div className="dashboard-container">
       <NavMenu responsiveLimit={responsiveLimit} />
       {renderResponsiveSegment()}
     </div>
