@@ -22,9 +22,13 @@
     align-items: flex-end;
     margin-bottom: 0 !important;
 
-    > .dropdown > .text {
+    > .dropdown {
+      flex-grow: 1 !important;
+
+      > .text {
       font-size: 1.1rem;
       font-weight: bolder;
+      }
     }
   }
 }

@@ -21,7 +21,7 @@ const NavDropdown = ({ itemsToRender, activeItem, className, header }) =>
         )}
       </Dropdown.Menu>
     </Dropdown>
-    <Menu.Item header position="right">
+    <Menu.Item header>
       {header}
     </Menu.Item>
   </Menu>;
