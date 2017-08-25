@@ -6,7 +6,7 @@
 
   &.collapse > .item:not(.active) {
     display: none !important;
-    @media (min-width: $mobile_breakpoint) {
+    @media (min-width: $responsive_breakpoint) {
       display: flex !important;
     }
   }
@@ -19,7 +19,7 @@
     > .nav-toggle {
       flex-grow: 1 !important;
       text-align: right;
-      @media (min-width: $mobile_breakpoint) {
+      @media (min-width: $responsive_breakpoint) {
         display: none;
       }
     }

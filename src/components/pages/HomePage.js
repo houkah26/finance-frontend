@@ -21,7 +21,7 @@ const HomePage = ({ changeRoute }) =>
       React front-end ecosystem. See footer below for links to source code.
     </p>
     <br />
-    <MediaQuery maxWidth={RESPONSIVE_LIMIT.MAIN_NAV}>
+    <MediaQuery maxWidth={RESPONSIVE_LIMIT}>
       <Button.Group size="large" fluid>
         <Button onClick={() => changeRoute("/login")}>Login</Button>
         <Button.Or />

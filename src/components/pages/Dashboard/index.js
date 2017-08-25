@@ -11,7 +11,7 @@ import "./index.css";
 
 const Dashboard = () => {
   const renderResponsiveSegment = () =>
-    <MediaQuery minWidth={RESPONSIVE_LIMIT.DASHBOARD}>
+    <MediaQuery minWidth={RESPONSIVE_LIMIT}>
       {matches =>
         matches
           ? <Segment attached="bottom">
@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <NavMenu responsiveLimit={RESPONSIVE_LIMIT.DASHBOARD} />
+      <NavMenu responsiveLimit={RESPONSIVE_LIMIT} />
       {renderResponsiveSegment()}
     </div>
   );

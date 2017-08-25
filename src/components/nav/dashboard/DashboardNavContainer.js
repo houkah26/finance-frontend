@@ -44,7 +44,7 @@ class NavMenu extends Component {
     ];
 
     return (
-      <MediaQuery minWidth={RESPONSIVE_LIMIT.DASHBOARD}>
+      <MediaQuery minWidth={RESPONSIVE_LIMIT}>
         {matches =>
           matches
             ? <NavBar

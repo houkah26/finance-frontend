@@ -4,7 +4,6 @@
 //     : "http://localhost:3001/api";
 
 export const API_URL = "https://finance-backend.herokuapp.com/api";
-export const RESPONSIVE_LIMIT = {
-  MAIN_NAV: 767,
-  DASHBOARD: 793
-};
+
+// Responsive limit for react media queries (px)
+export const RESPONSIVE_LIMIT = 767;
