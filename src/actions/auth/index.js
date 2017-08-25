@@ -2,111 +2,89 @@ import cookie from "react-cookie";
 import axios from "axios";
 import { push } from "react-router-redux";
 
-import errorHandler from "./errorHandler";
+import errorHandler from "../handlers/errorHandler";
+import loginHandler from "../handlers/loginHandler";
 
-import { AUTH_USER, ERROR, UNAUTH_USER, IS_REQUESTING } from "../types";
+import { AUTH_USER, AUTH_ERROR, UNAUTH_USER, AUTH_REQUEST } from "../types";
 import { API_URL } from "../../constants";
 
 //= =====================
 // Auth Action Creators
 //= =====================
-export function loginUser({ username, password }) {
-  return function(dispatch) {
-    dispatch({
-      type: IS_REQUESTING
+export const loginUser = ({ username, password }) => dispatch => {
+  dispatch({
+    type: AUTH_REQUEST
+  });
+
+  axios
+    .post(`${API_URL}/auth/login`, { username, password })
+    .then(response => {
+      loginHandler(dispatch, response.data.token, response.data.user);
+    })
+    .catch(error => {
+      errorHandler(dispatch, error.response, AUTH_ERROR);
     });
+};
 
-    axios
-      .post(`${API_URL}/auth/login`, { username, password })
-      .then(response => {
-        loginHandler(dispatch, response.data.token, response.data.user);
-      })
-      .catch(error => {
-        errorHandler(dispatch, error.response, ERROR);
-      });
-  };
-}
+export const registerUser = ({
+  username,
+  firstName,
+  lastName,
+  password
+}) => dispatch => {
+  dispatch({
+    type: AUTH_REQUEST
+  });
 
-export function registerUser({ username, firstName, lastName, password }) {
-  return function(dispatch) {
-    dispatch({
-      type: IS_REQUESTING
+  axios
+    .post(`${API_URL}/auth/register`, {
+      username,
+      firstName,
+      lastName,
+      password
+    })
+    .then(response => {
+      loginHandler(dispatch, response.data.token, response.data.user);
+    })
+    .catch(error => {
+      errorHandler(dispatch, error.response, AUTH_ERROR);
     });
+};
 
-    axios
-      .post(`${API_URL}/auth/register`, {
-        username,
-        firstName,
-        lastName,
-        password
-      })
-      .then(response => {
-        loginHandler(dispatch, response.data.token, response.data.user);
-      })
-      .catch(error => {
-        errorHandler(dispatch, error.response, ERROR);
-      });
-  };
-}
+export const logoutUser = () => dispatch => {
+  dispatch({ type: UNAUTH_USER });
+  cookie.remove("token", { path: "/" });
 
-export function logoutUser() {
-  return function(dispatch) {
-    dispatch({ type: UNAUTH_USER });
-    cookie.remove("token", { path: "/" });
+  dispatch(push("/login"));
+};
 
-    dispatch(push("/login"));
-  };
-}
-
-export function clearAuthErrors() {
+export const clearAuthErrors = () => {
   return function(dispatch) {
     dispatch({
-      type: ERROR,
+      type: AUTH_ERROR,
       payload: ""
     });
   };
-}
+};
 
-export function fetchUser(token) {
-  return function(dispatch) {
-    axios
-      .get(`${API_URL}/user/info`, {
-        headers: { Authorization: token }
-      })
-      .then(response => {
-        // set auth status to true and set user info
-        dispatch({
-          type: AUTH_USER,
-          user: response.data.user
-        });
-      })
-      .catch(error => {
-        // token was likely bad
-        // remove token, return to login page, and dispatch error
-        cookie.remove("token", { path: "/" });
-        dispatch(push("/login"));
-
-        errorHandler(dispatch, error.response, ERROR);
+export const fetchUser = token => dispatch => {
+  axios
+    .get(`${API_URL}/user/info`, {
+      headers: { Authorization: token }
+    })
+    .then(response => {
+      // set auth status to true and set user info
+      dispatch({
+        type: AUTH_USER,
+        user: response.data.user
       });
-  };
-}
+    })
+    .catch(error => {
+      // token was likely bad
+      // remove token, return to login page, and dispatch error
+      cookie.remove("token", { path: "/" });
+      dispatch(push("/login"));
 
-//= =====================
-// Handlers
-//= =====================
-
-// Login handler for setting token, user info, and auth status on
-// succesfull authentication
-const loginHandler = (dispatch, token, user) => {
-  // set web token
-  cookie.save("token", token, { path: "/" });
-
-  // set auth status to true and set user info
-  dispatch({
-    type: AUTH_USER,
-    user: user
-  });
-
-  // reroute to dashboard
-  dispatch(push("/dashboard"));
+      errorHandler(dispatch, error.response, AUTH_ERROR);
+    });
 };

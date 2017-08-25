@@ -1,8 +1,8 @@
 import { has as _has } from "lodash";
 
 // Error handler
-export default function errorHandler(dispatch, error, type) {
-  console.log(error);
+const errorHandler = (dispatch, error, type) => {
+  console.log("error handler:", error);
 
   // check for error message otherwise set as network error
   let errorMessage;
@@ -25,4 +25,6 @@ export default function errorHandler(dispatch, error, type) {
       payload: errorMessage
     });
   }
-}
+};
+
+export default errorHandler;
