@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import axios from "axios";
-import cookie from "react-cookie";
-import { round } from "lodash";
+import { connect } from "react-redux";
 
-import { calcTotalValue } from "./helperFunctions";
-import { API_URL } from "../../../constants";
+import { fetchStock } from "../../../actions/stock";
+import {
+  getStockList,
+  getIsStockFetching,
+  getStockErrorMessage,
+  getStockTotalValue
+} from "../../../reducers";
 
 import Loading from "../../loading";
 import Table from "../../table";
@@ -18,49 +21,16 @@ const tableHeaders = [
   { name: "Total Value ($)", key: "total", sortKey: "totalNum" }
 ];
 
-export default class Portfolio extends Component {
-  state = {
-    portfolio: null,
-    totalValue: 0
-  };
-
+class Portfolio extends Component {
   componentDidMount() {
-    this.fetchPortfolio();
+    this.props.fetchStock("portfolio");
   }
 
-  fetchPortfolio = () => {
-    const token = cookie.load("token");
-
-    axios
-      .get(`${API_URL}/user/portfolio`, {
-        headers: { Authorization: token }
-      })
-      .then(response => {
-        // calculate total value
-        const totalValue = calcTotalValue(response.data.portfolio);
-
-        // round prices & set alt sorting values
-        const portfolio = mapPortfolio(response.data.portfolio);
-
-        this.setState({
-          portfolio: portfolio,
-          totalValue: totalValue.toFixed(2)
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
   render() {
-    const { portfolio, totalValue } = this.state;
+    const { portfolio, totalValue, isStockFetching } = this.props;
     const tableFooter = [null, null, null, "Total", totalValue];
 
-    if (portfolio === null) {
-      return <Loading />;
-    } else if (portfolio.length === 0) {
-      return <NoStockInPortfolio />;
-    } else {
+    if (portfolio.length > 0) {
       return (
         <Table
           tableData={portfolio}
@@ -69,17 +39,24 @@ export default class Portfolio extends Component {
         />
       );
     }
+
+    if (isStockFetching) {
+      return <Loading />;
+    } else {
+      return <NoStockInPortfolio />;
+    }
   }
 }
 
-const mapPortfolio = portfolio => {
-  return portfolio.map(stock => {
-    // Copy price and total for sorting with sortKey
-    stock.priceNum = stock.price;
-    stock.totalNum = stock.total;
+const mapStateToProps = state => {
+  const listType = "portfolio";
 
-    stock.price = round(stock.price, 2).toFixed(2);
-    stock.total = round(stock.total, 2).toFixed(2);
-    return stock;
-  });
+  return {
+    portfolio: getStockList(state, listType),
+    totalValue: getStockTotalValue(state, listType),
+    isStockFetching: getIsStockFetching(state, listType),
+    errorMessage: getStockErrorMessage(state, listType)
+  };
 };
+
+export default connect(mapStateToProps, { fetchStock })(Portfolio);
