@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Header, Button } from "semantic-ui-react";
 import MediaQuery from "react-responsive";
 
-import { changeRoute } from "../../actions/utility";
+import { changeRoute } from "../../actions/routing";
 import { RESPONSIVE_LIMIT } from "../../constants";
 
 const HomePage = ({ changeRoute }) =>

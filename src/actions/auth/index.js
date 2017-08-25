@@ -4,8 +4,8 @@ import { push } from "react-router-redux";
 
 import errorHandler from "./errorHandler";
 
-import { AUTH_USER, ERROR, UNAUTH_USER, IS_REQUESTING } from "./types";
-import { API_URL } from "../constants";
+import { AUTH_USER, ERROR, UNAUTH_USER, IS_REQUESTING } from "../types";
+import { API_URL } from "../../constants";
 
 //= =====================
 // Auth Action Creators

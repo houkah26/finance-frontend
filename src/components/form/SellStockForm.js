@@ -6,7 +6,7 @@ import { Form, Message } from "semantic-ui-react";
 
 import { isPositiveInt } from "./helperFunctions";
 
-import { sellStock } from "../../actions/user";
+import { sellStock } from "../../actions/auth/user";
 
 import renderFields from "./renderFields";
 

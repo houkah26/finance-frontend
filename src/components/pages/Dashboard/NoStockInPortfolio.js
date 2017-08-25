@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Header, Button } from "semantic-ui-react";
 
-import { changeRoute } from "../../../actions/utility";
+import { changeRoute } from "../../../actions/routing";
 
 class NoStockInPortfolio extends Component {
   handleClick = () => {

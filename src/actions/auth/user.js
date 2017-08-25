@@ -3,8 +3,8 @@ import cookie from "react-cookie";
 import { push } from "react-router-redux";
 
 import errorHandler from "./errorHandler";
-import { UPDATE_USER, ERROR } from "./types";
-import { API_URL } from "../constants";
+import { UPDATE_USER, ERROR } from "../types";
+import { API_URL } from "../../constants";
 
 //= =====================
 // User Action Creators

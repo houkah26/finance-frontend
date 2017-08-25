@@ -9,8 +9,9 @@ import { RESPONSIVE_LIMIT } from "../../../constants";
 
 import "./index.css";
 
-const Dashboard = () => {
-  const renderResponsiveSegment = () =>
+const Dashboard = () =>
+  <div className="dashboard-container">
+    <NavMenu responsiveLimit={RESPONSIVE_LIMIT} />
     <MediaQuery minWidth={RESPONSIVE_LIMIT}>
       {matches =>
         matches
@@ -20,14 +21,7 @@ const Dashboard = () => {
           : <Segment vertical className="dashboard-content-container">
               <Routes />
             </Segment>}
-    </MediaQuery>;
-
-  return (
-    <div className="dashboard-container">
-      <NavMenu responsiveLimit={RESPONSIVE_LIMIT} />
-      {renderResponsiveSegment()}
-    </div>
-  );
-};
+    </MediaQuery>
+  </div>;
 
 export default Dashboard;

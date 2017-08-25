@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { logoutUser } from "../../../actions/auth";
-import { changeRoute } from "../../../actions/utility";
+import { changeRoute } from "../../../actions/routing";
 
 import NavBar from "../NavBar";
 

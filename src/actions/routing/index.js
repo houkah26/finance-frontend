@@ -1,6 +1,6 @@
 import { push } from "react-router-redux";
 
-import { CLEAR_ERROR } from "../actions/types";
+import { CLEAR_ERROR } from "../types";
 
 //= =====================
 // Utility Actions

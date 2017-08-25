@@ -4,7 +4,7 @@ import { round } from "lodash";
 import MediaQuery from "react-responsive";
 import PropTypes from "prop-types";
 
-import { changeRoute } from "../../../actions/utility";
+import { changeRoute } from "../../../actions/routing";
 import { RESPONSIVE_LIMIT } from "../../../constants";
 
 import NavBar from "../NavBar";

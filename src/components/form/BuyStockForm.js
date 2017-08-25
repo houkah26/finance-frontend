@@ -8,7 +8,7 @@ import { round } from "lodash";
 
 import { isPositiveInt } from "./helperFunctions";
 
-import { buyStock } from "../../actions/user";
+import { buyStock } from "../../actions/auth/user";
 
 import { API_URL } from "../../constants";
 
