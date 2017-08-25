@@ -1,7 +1,7 @@
 // AUTH ACTIONS
 export const AUTH_USER = "auth_user",
   UNAUTH_USER = "unauth_user",
-  ERROR = "error",
+  AUTH_ERROR = "auth_error",
   UPDATE_USER = "update_user",
   CLEAR_ERROR = "clear_error",
   IS_REQUESTING = "is_requesting";

@@ -137,7 +137,7 @@ class SellStockForm extends Component {
 }
 
 const mapStateToProps = state => {
-  return { sellStockErrorMessage: state.auth.error };
+  return { sellStockErrorMessage: state.auth.errorMessage };
 };
 
 const createForm = reduxForm({

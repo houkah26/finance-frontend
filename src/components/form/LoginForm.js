@@ -57,7 +57,10 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => {
-  return { errorMessage: state.auth.error, isLoading: state.auth.isRequesting };
+  return {
+    errorMessage: state.auth.errorMessage,
+    isLoading: state.auth.isRequesting
+  };
 };
 
 const createForm = reduxForm({

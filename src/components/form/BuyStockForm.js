@@ -141,7 +141,10 @@ class BuyStockForm extends Component {
 }
 
 const mapStateToProps = state => {
-  return { cash: state.auth.user.cash, buyErrorMessage: state.auth.error };
+  return {
+    cash: state.auth.user.cash,
+    buyErrorMessage: state.auth.errorMessage
+  };
 };
 
 const createForm = reduxForm({

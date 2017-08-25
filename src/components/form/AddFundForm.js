@@ -64,7 +64,10 @@ class AddFunds extends Component {
 }
 
 const mapStateToProps = state => {
-  return { cash: state.auth.user.cash, addFundErrorMessage: state.auth.error };
+  return {
+    cash: state.auth.user.cash,
+    addFundErrorMessage: state.auth.errorMessage
+  };
 };
 
 const createForm = reduxForm({
