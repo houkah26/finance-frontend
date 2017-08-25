@@ -39,7 +39,7 @@ class NavMenu extends Component {
       },
       {
         header: true,
-        content: `Cash Balance: $${cash}`
+        content: `Funds: $${cash}`
       }
     ];
 
@@ -58,7 +58,7 @@ class NavMenu extends Component {
                 itemsToRender={itemsToRender.slice(0, -1)}
                 activeItem={activeItem}
                 className={className}
-                header={dropdownHeader}
+                header={itemsToRender.slice(-1)[0].content}
               />}
       </MediaQuery>
     );
