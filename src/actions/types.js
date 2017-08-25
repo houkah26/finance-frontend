@@ -4,4 +4,5 @@ export const AUTH_USER = "auth_user",
   AUTH_ERROR = "auth_error",
   UPDATE_USER = "update_user",
   CLEAR_ERROR = "clear_error",
-  IS_REQUESTING = "is_requesting";
+  AUTH_REQUEST = "auth_request";
+
