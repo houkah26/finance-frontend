@@ -1,8 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
+import { Header, Button } from "semantic-ui-react";
+import MediaQuery from "react-responsive";
 
-const HomePage = () =>
+import { changeRoute } from "../../actions/utility";
+import { RESPONSIVE_LIMIT } from "../../constants";
+
+const HomePage = ({ changeRoute }) =>
   <div>
-    <h2>Welcome to React Finance</h2>
+    <Header>Welcome to React Finance</Header>
     <p>
       A web application where users can buy and sell stock (no real money
       required). Please pardon the initial load time, the back-end server hosted
@@ -14,6 +20,14 @@ const HomePage = () =>
       and React) as a personal project to become more familiar with the modern
       React front-end ecosystem. See footer below for links to source code.
     </p>
+    <br />
+    <MediaQuery maxWidth={RESPONSIVE_LIMIT.MAIN_NAV}>
+      <Button.Group size="large" fluid>
+        <Button onClick={() => changeRoute("/login")}>Login</Button>
+        <Button.Or />
+        <Button onClick={() => changeRoute("/register")}>Register</Button>
+      </Button.Group>
+    </MediaQuery>
   </div>;
 
-export default HomePage;
+export default connect(null, { changeRoute })(HomePage);
