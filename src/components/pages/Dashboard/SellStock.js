@@ -34,7 +34,7 @@ export default class SellStock extends Component {
         });
       })
       .catch(error => {
-        console.log(error);
+        console.log("sell stock", error);
       });
   };
 

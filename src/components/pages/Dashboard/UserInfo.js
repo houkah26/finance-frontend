@@ -33,7 +33,7 @@ class UserInfo extends Component {
         });
       })
       .catch(error => {
-        console.log(error);
+        console.log("user info", error);
       });
   };
 
