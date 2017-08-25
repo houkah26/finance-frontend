@@ -1,4 +1,5 @@
-.dashboard-nav-menu {
+.dashboard-nav-container {
+  // Styles for nav bav menu at large screens
   &.nav-bar {
     background-color: rgba(34, 36, 38, .15) !important;
 
@@ -16,6 +17,7 @@
     }
   }
 
+  // Styles for nav dropdown menu at small screens
   &.nav-dropdown {
     display: flex;
     justify-content: space-between;
@@ -26,8 +28,8 @@
       flex-grow: 1 !important;
 
       > .text {
-      font-size: 1.1rem;
-      font-weight: bolder;
+        font-size: 1.1rem;
+        font-weight: bolder;
       }
     }
   }

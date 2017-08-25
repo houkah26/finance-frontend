@@ -5,7 +5,7 @@ import DashboardNavContainer from "./DashboardNavContainer";
 import "./index.css";
 
 const DashboardNav = ({ responsiveLimit }) =>
-  <DashboardNavContainer className={"dashboard-nav-menu"} />;
+  <DashboardNavContainer className={"dashboard-nav-container"} />;
 
 DashboardNav.propTypes = {
   responsiveLimit: PropTypes.number.isRequired
