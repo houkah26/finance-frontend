@@ -5,13 +5,13 @@ import MediaQuery from "react-responsive";
 import NavMenu from "../../nav/dashboard/index";
 import Routes from "./Routes";
 
+import { RESPONSIVE_LIMIT } from "../../../constants";
+
 import "./index.css";
 
 const Dashboard = () => {
-  const responsiveLimit = 793;
-
   const renderResponsiveSegment = () =>
-    <MediaQuery minWidth={responsiveLimit}>
+    <MediaQuery minWidth={RESPONSIVE_LIMIT.DASHBOARD}>
       {matches =>
         matches
           ? <Segment attached="bottom">
@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <NavMenu responsiveLimit={responsiveLimit} />
+      <NavMenu responsiveLimit={RESPONSIVE_LIMIT.DASHBOARD} />
       {renderResponsiveSegment()}
     </div>
   );

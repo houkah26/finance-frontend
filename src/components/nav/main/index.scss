@@ -1,4 +1,4 @@
-$breakpoint-mobile: 768px;
+@import "../../../_variables";
 
 .main-nav-menu.nav-bar {
   border-radius: 0 !important;
@@ -6,7 +6,7 @@ $breakpoint-mobile: 768px;
 
   &.collapse > .item:not(.active) {
     display: none !important;
-    @media (min-width: $breakpoint-mobile) {
+    @media (min-width: $mobile_breakpoint) {
       display: flex !important;
     }
   }
@@ -19,7 +19,7 @@ $breakpoint-mobile: 768px;
     > .nav-toggle {
       flex-grow: 1 !important;
       text-align: right;
-      @media (min-width: $breakpoint-mobile) {
+      @media (min-width: $mobile_breakpoint) {
         display: none;
       }
     }

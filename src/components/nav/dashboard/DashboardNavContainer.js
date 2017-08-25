@@ -5,6 +5,7 @@ import MediaQuery from "react-responsive";
 import PropTypes from "prop-types";
 
 import { changeRoute } from "../../../actions/utility";
+import { RESPONSIVE_LIMIT } from "../../../constants";
 
 import NavBar from "../NavBar";
 import NavDropdown from "../NavDropdown";
@@ -42,10 +43,8 @@ class NavMenu extends Component {
       }
     ];
 
-    const dropdownHeader = `Funds: $${cash}`;
-
     return (
-      <MediaQuery minWidth={793}>
+      <MediaQuery minWidth={RESPONSIVE_LIMIT.DASHBOARD}>
         {matches =>
           matches
             ? <NavBar
