@@ -28,7 +28,7 @@ class Portfolio extends Component {
 
   render() {
     const { portfolio, totalValue, isStockFetching } = this.props;
-    const tableFooter = [null, null, null, "Total", totalValue];
+    const tableFooter = [null, null, null, "Total", totalValue.toFixed(2)];
 
     if (portfolio.length > 0) {
       return (
