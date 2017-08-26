@@ -82,10 +82,6 @@ class BuyStockForm extends Component {
       });
   };
 
-  handlePurchaseClick = () => {
-    this.props.buyStock(this.state.quoteSymbol, this.state.numShares);
-  };
-
   render() {
     const {
       quoteSymbol,
@@ -96,7 +92,7 @@ class BuyStockForm extends Component {
       isSuccesfull
     } = this.state;
 
-    const { handleSubmit, buyErrorMessage } = this.props;
+    const { handleSubmit, buyErrorMessage, buyStock } = this.props;
 
     const quoteContainsError = quoteErrorMessage.length > 0;
     const buyContainsError = buyErrorMessage.length > 0;
@@ -125,7 +121,7 @@ class BuyStockForm extends Component {
                 positive
                 compact
                 floated="right"
-                onClick={this.handlePurchaseClick}
+                onClick={() => buyStock(quoteSymbol, numShares)}
               >
                 Purchase
               </Button>}
