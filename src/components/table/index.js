@@ -20,16 +20,6 @@ export default class TableSortable extends Component {
     direction: null
   };
 
-  // componentDidMount() {
-  //   this.setState({ data: this.props.tableData });
-  // }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.tableData !== this.props.Tabledata) {
-  //     this.setState({ data: nextProps.Tabledata });
-  //   }
-  // }
-
   handleSort = (clickedColumn, altSortKey) => () => {
     const { column, direction } = this.state;
 
@@ -38,7 +28,6 @@ export default class TableSortable extends Component {
         column: clickedColumn,
         reverse: false,
         altSortKey,
-        // data: sortBy(data, [altSortKey || clickedColumn]),
         direction: "ascending"
       });
 
