@@ -79,11 +79,11 @@ class SellStockForm extends Component {
           </List.Item>
           <List.Item>
             <List.Header>Current Price</List.Header>
-            {`$${stock.price.toFixed(2)}`}
+            {`$${stock.price}`}
           </List.Item>
           <List.Item>
             <List.Header>Total Value</List.Header>
-            {`$${stock.total.toFixed(2)}`}
+            {`$${stock.total}`}
           </List.Item>
         </List>
       );
