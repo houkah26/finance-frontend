@@ -2,20 +2,43 @@ import React, { Component } from "react";
 import { Table } from "semantic-ui-react";
 import { sortBy } from "lodash";
 
+const sortData = (column, reverse, altSortKey, data) => {
+  if (!column) {
+    return data;
+  }
+
+  const sortedData = sortBy(data, [altSortKey || column]);
+
+  return reverse ? sortedData.reverse() : sortedData;
+};
+
 export default class TableSortable extends Component {
   state = {
     column: null,
-    data: this.props.tableData,
+    reverse: false,
+    altSortKey: null,
     direction: null
   };
 
+  // componentDidMount() {
+  //   this.setState({ data: this.props.tableData });
+  // }
+
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.tableData !== this.props.Tabledata) {
+  //     this.setState({ data: nextProps.Tabledata });
+  //   }
+  // }
+
   handleSort = (clickedColumn, altSortKey) => () => {
-    const { column, data, direction } = this.state;
+    const { column, direction } = this.state;
 
     if (column !== clickedColumn) {
       this.setState({
         column: clickedColumn,
-        data: sortBy(data, [altSortKey || clickedColumn]),
+        reverse: false,
+        altSortKey,
+        // data: sortBy(data, [altSortKey || clickedColumn]),
         direction: "ascending"
       });
 
@@ -23,7 +46,7 @@ export default class TableSortable extends Component {
     }
 
     this.setState({
-      data: data.reverse(),
+      reverse: true,
       direction: direction === "ascending" ? "descending" : "ascending"
     });
   };
@@ -47,8 +70,9 @@ export default class TableSortable extends Component {
   };
 
   render() {
-    const { column, data, direction } = this.state;
-    const { tableHeaders } = this.props;
+    const { column, reverse, direction, altSortKey } = this.state;
+    const { tableHeaders, tableData } = this.props;
+    const sortedData = sortData(column, reverse, altSortKey, tableData);
 
     return (
       <Table sortable celled striped unstackable>
@@ -66,7 +90,7 @@ export default class TableSortable extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {data.map((stock, index) =>
+          {sortedData.map((stock, index) =>
             <Table.Row key={stock.stockSymbol + index}>
               {tableHeaders.map(header =>
                 <Table.Cell key={header.key}>
