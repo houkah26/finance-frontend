@@ -6,13 +6,13 @@ import axios from "axios";
 import cookie from "react-cookie";
 import { round } from "lodash";
 
-import { isPositiveInt } from "./helperFunctions";
+import { isPositiveInt } from "../helperFunctions";
 
-import { buyStock } from "../../actions/auth/user";
+import { buyStock } from "../../../actions/auth/user";
 
-import { API_URL } from "../../constants";
+import { API_URL } from "../../../constants";
 
-import renderFields from "./renderFields";
+import renderFields from "../renderFields";
 
 import "./BuyStockForm.css";
 
