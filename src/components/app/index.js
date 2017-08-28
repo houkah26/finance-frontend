@@ -4,7 +4,7 @@ import { ConnectedRouter } from "react-router-redux";
 
 import store, { history } from "../../store";
 
-import MainContainer from "../../containers/MainContainer";
+import MainAuthContainer from "../../components/auth/MainAuthContainer";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <MainContainer />
+          <MainAuthContainer />
         </ConnectedRouter>
       </Provider>
     );
