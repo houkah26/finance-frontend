@@ -29,8 +29,9 @@ const inititalState = {
   numShares: 0,
   totalCost: 0,
   quoteErrorMessage: "",
-  isLoading: false,
-  isSuccesfull: false
+  quoteIsLoading: false,
+  quoteIsSuccesfull: false,
+  buyIsLoading: false
 };
 
 // Form validation for redux-form
@@ -53,7 +54,7 @@ class BuyStockForm extends Component {
   state = inititalState;
 
   handleFormSubmit = formProps => {
-    this.setState({ ...inititalState, isLoading: true });
+    this.setState({ ...inititalState, quoteIsLoading: true });
     this.fetchQuote(formProps.stockSymbol, formProps.numberOfShares);
   };
 
@@ -71,7 +72,7 @@ class BuyStockForm extends Component {
           quotePrice: round(data.price, 2).toFixed(2),
           numShares: numberOfShares,
           totalCost: round(data.price * numberOfShares, 2),
-          isSuccesfull: true
+          quoteIsSuccesfull: true
         });
       })
       .catch(error => {
@@ -82,17 +83,27 @@ class BuyStockForm extends Component {
       });
   };
 
+  handleBuyClick = () => {
+    this.setState({
+      buyIsLoading: true
+    });
+
+    const { quoteSymbol, numShares } = this.state;
+    this.props.buyStock(quoteSymbol, numShares);
+  };
+
   render() {
     const {
       quoteSymbol,
       numShares,
       totalCost,
       quoteErrorMessage,
-      isLoading,
-      isSuccesfull
+      quoteIsLoading,
+      quoteIsSuccesfull,
+      buyIsLoading
     } = this.state;
 
-    const { handleSubmit, buyErrorMessage, buyStock } = this.props;
+    const { handleSubmit, buyErrorMessage } = this.props;
 
     const quoteContainsError = quoteErrorMessage.length > 0;
     const buyContainsError = buyErrorMessage.length > 0;
@@ -102,31 +113,36 @@ class BuyStockForm extends Component {
         <Header size="medium">Buy Stock:</Header>
         <Form
           error={quoteContainsError}
-          success={isSuccesfull}
+          success={quoteIsSuccesfull}
           onSubmit={handleSubmit(this.handleFormSubmit)}
         >
           <Form.Group widths="equal">
             {renderFields(inputFields)}
           </Form.Group>
-          <Form.Button loading={isLoading}>
+          <Form.Button loading={quoteIsLoading}>
             Calculate Transaction Cost
           </Form.Button>
           <Message error content={quoteErrorMessage} />
-          <Message className="success-message" success>
-            <span
-            >{`${numShares} shares of ${quoteSymbol} costs $${totalCost}.`}</span>
-            {isSuccesfull &&
-              <Button
-                size="mini"
-                positive
-                compact
-                floated="right"
-                onClick={() => buyStock(quoteSymbol, numShares)}
-              >
-                Purchase
-              </Button>}
-          </Message>
         </Form>
+        <Message
+          className="success-message"
+          success
+          hidden={!quoteIsSuccesfull}
+        >
+          <span
+          >{`${numShares} shares of ${quoteSymbol} costs $${totalCost}.`}</span>
+          {quoteIsSuccesfull &&
+            <Button
+              size="mini"
+              positive
+              compact
+              floated="right"
+              onClick={this.handleBuyClick}
+              loading={buyIsLoading}
+            >
+              Purchase
+            </Button>}
+        </Message>
         <br />
         <Message error hidden={!buyContainsError}>
           {buyErrorMessage}
