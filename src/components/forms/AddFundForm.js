@@ -26,23 +26,24 @@ const validate = formProps => {
 
 class AddFunds extends Component {
   state = {
-    addFundSuccess: false
+    addFundSuccess: false,
+    isLoading: false
   };
 
   componentWillReceiveProps(nextProps) {
     // If cash was increased set addFundSuccess to true
-    if (nextProps.cash > this.props.cash) {
-      this.setState({ addFundSuccess: true });
-    }
+    const addFundSuccessful = nextProps.cash > this.props.cash;
+
+    this.setState({ addFundSuccess: addFundSuccessful, isLoading: false });
   }
 
   handleFormSubmit = formProps => {
-    this.setState({ addFundSuccess: false });
+    this.setState({ addFundSuccess: false, isLoading: true });
     this.props.addFunds(formProps.fundAmount);
   };
 
   render() {
-    const { addFundSuccess } = this.state;
+    const { addFundSuccess, isLoading } = this.state;
     const { handleSubmit, addFundErrorMessage } = this.props;
     const addFundContainsError = addFundErrorMessage.length > 0;
 
@@ -53,7 +54,7 @@ class AddFunds extends Component {
         onSubmit={handleSubmit(this.handleFormSubmit)}
       >
         {renderFields(inputFields)}
-        <Form.Button color="green">
+        <Form.Button color="green" loading={isLoading}>
           <Icon name="dollar" />Add Funds
         </Form.Button>
         <Message error content={addFundErrorMessage} />
