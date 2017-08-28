@@ -1,5 +1,5 @@
 import React from "react";
-import LoginForm from "../form/LoginForm";
+import LoginForm from "../forms/LoginForm";
 
 const divStyles = {
   maxWidth: "300px",

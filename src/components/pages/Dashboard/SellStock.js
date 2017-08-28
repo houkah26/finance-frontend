@@ -9,7 +9,7 @@ import {
 } from "../../../reducers";
 
 import Loading from "../../loading";
-import SellStockForm from "../../../components/form/SellStockForm";
+import SellStockForm from "../../../components/forms/SellStockForm";
 import NoStockInPortfolio from "./NoStockInPortfolio";
 
 class SellStock extends Component {

@@ -7,7 +7,7 @@ import { round } from "lodash";
 
 import { API_URL } from "../../constants";
 
-import renderFields from "./renderFields";
+import renderFields from "./components/renderFields";
 
 // Input fields to render
 const inputFields = [{ name: "stockSymbol", type: "text" }];

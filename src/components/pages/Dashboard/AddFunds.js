@@ -1,16 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import AddFundForm from '../../form/AddFundForm';
+import AddFundForm from "../../forms/AddFundForm";
 
 const divStyles = {
   maxWidth: "300px",
   margin: "0 auto"
-}
+};
 
-const AddFunds = () => (
+const AddFunds = () =>
   <div style={divStyles}>
     <AddFundForm />
-  </div>
-)
+  </div>;
 
 export default AddFunds;

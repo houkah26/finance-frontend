@@ -1,5 +1,5 @@
 import React from "react";
-import RegisterForm from "../form/RegisterForm";
+import RegisterForm from "../forms/RegisterForm";
 
 const divStyles = {
   maxWidth: "400px",

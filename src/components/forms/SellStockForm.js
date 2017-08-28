@@ -8,7 +8,7 @@ import { isPositiveInt } from "./helperFunctions";
 
 import { sellStock } from "../../actions/auth/user";
 
-import renderFields from "./renderFields";
+import renderFields from "./components/renderFields";
 
 // Input fields to render
 const inputFields = [{ name: "numberOfShares", type: "number" }];

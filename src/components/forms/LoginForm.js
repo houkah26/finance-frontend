@@ -5,7 +5,7 @@ import { Form, Message, Icon } from "semantic-ui-react";
 
 import { loginUser, clearAuthErrors } from "../../actions/auth";
 
-import renderFields from "./renderFields";
+import renderFields from "./components/renderFields";
 
 // Input fields to render
 const inputFields = [

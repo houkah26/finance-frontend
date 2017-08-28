@@ -5,8 +5,8 @@ import { Form, Message, Icon } from "semantic-ui-react";
 
 import { registerUser, clearAuthErrors } from "../../actions/auth";
 
-import renderFields from "./renderFields";
-import Checkbox from "./Checkbox";
+import renderFields from "./components/renderFields";
+import Checkbox from "./components/Checkbox";
 
 // Input fields to render
 const inputFields = [

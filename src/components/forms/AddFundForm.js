@@ -7,7 +7,7 @@ import { countDecimals } from "./helperFunctions";
 
 import { addFunds } from "../../actions/auth/user";
 
-import renderFields from "./renderFields";
+import renderFields from "./components/renderFields";
 
 // Input fields to render
 const inputFields = [{ name: "fundAmount", type: "number" }];

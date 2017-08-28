@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid } from "semantic-ui-react";
 
-import QuoteStockForm from "../../form/QuoteStockForm";
-import BuyStockForm from "../../form/BuyStockForm";
+import QuoteStockForm from "../../forms/QuoteStockForm";
+import BuyStockForm from "../../forms/BuyStockForm";
 
 const BuyStock = () =>
   <Grid className="buy-stock-container" stackable columns={2} divided>
