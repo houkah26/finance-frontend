@@ -1,18 +1,36 @@
 import React, { Component } from "react";
 import { Table } from "semantic-ui-react";
 import { sortBy } from "lodash";
+import PropTypes from "prop-types";
+
+import TableHeader from "./TableHeader";
+import TableBody from "./TableBody";
+import TableFooter from "./TableFooter";
 
 const sortData = (column, reverse, altSortKey, data) => {
   if (!column) {
     return data;
   }
 
+  // Sort by altSortKey if exists otherwise sort by column
   const sortedData = sortBy(data, [altSortKey || column]);
 
   return reverse ? sortedData.reverse() : sortedData;
 };
 
 export default class TableSortable extends Component {
+  static propTypes = {
+    tableHeaders: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        sortKey: PropTypes.string
+      })
+    ).isRequired,
+    tableData: PropTypes.array.isRequired,
+    tableFooter: PropTypes.array
+  };
+
   state = {
     column: null,
     reverse: false,
@@ -40,56 +58,21 @@ export default class TableSortable extends Component {
     });
   };
 
-  renderFooter = () => {
-    const { tableFooter } = this.props;
-
-    if (tableFooter) {
-      return (
-        <Table.Header>
-          <Table.Row>
-            {tableFooter.map((tableCell, index) =>
-              <Table.HeaderCell key={index}>
-                {tableCell}
-              </Table.HeaderCell>
-            )}
-          </Table.Row>
-        </Table.Header>
-      );
-    }
-  };
-
   render() {
     const { column, reverse, direction, altSortKey } = this.state;
-    const { tableHeaders, tableData } = this.props;
+    const { tableHeaders, tableData, tableFooter } = this.props;
     const sortedData = sortData(column, reverse, altSortKey, tableData);
 
     return (
       <Table sortable celled striped unstackable>
-        <Table.Header>
-          <Table.Row>
-            {tableHeaders.map(header =>
-              <Table.HeaderCell
-                sorted={column === header.key ? direction : null}
-                onClick={this.handleSort(header.key, header.sortKey)}
-                key={header.name}
-              >
-                {header.name}
-              </Table.HeaderCell>
-            )}
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {sortedData.map((stock, index) =>
-            <Table.Row key={stock.stockSymbol + index}>
-              {tableHeaders.map(header =>
-                <Table.Cell key={header.key}>
-                  {stock[header.key]}
-                </Table.Cell>
-              )}
-            </Table.Row>
-          )}
-        </Table.Body>
-        {this.renderFooter()}
+        <TableHeader
+          tableHeaders={tableHeaders}
+          sortColumn={column}
+          direction={direction}
+          handleSort={this.handleSort}
+        />
+        <TableBody tableData={sortedData} tableHeaders={tableHeaders} />
+        {tableFooter && <TableFooter tableFooter={tableFooter} />}
       </Table>
     );
   }
