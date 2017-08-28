@@ -38,7 +38,11 @@ const mapStockOptions = portfolio => {
 };
 
 class SellStockForm extends Component {
-  state = { stockOptions: [], selectedStock: null, sellStockSuccess: false };
+  state = {
+    stockOptions: [],
+    selectedStock: null,
+    isLoading: false
+  };
 
   componentDidMount() {
     this.setState({ stockOptions: mapStockOptions(this.props.portfolio) });
@@ -53,6 +57,8 @@ class SellStockForm extends Component {
   };
 
   handleFormSubmit = formProps => {
+    this.setState({ isLoading: true });
+
     this.props.sellStock(
       this.state.selectedStock.stockSymbol,
       formProps.numberOfShares
@@ -93,6 +99,7 @@ class SellStockForm extends Component {
   renderSellForm = () => {
     const stock = this.state.selectedStock;
     const { handleSubmit, sellStockErrorMessage } = this.props;
+    const { isLoading } = this.state;
     const sellStockContainsError = sellStockErrorMessage.length > 0;
 
     if (stock) {
@@ -102,7 +109,9 @@ class SellStockForm extends Component {
           onSubmit={handleSubmit(this.handleFormSubmit)}
         >
           {renderFields(inputFields)}
-          <Form.Button>Sell Stock</Form.Button>
+          <Form.Button loading={isLoading && !sellStockContainsError}>
+            Sell Stock
+          </Form.Button>
           <Message error content={sellStockErrorMessage} />
         </Form>
       );
