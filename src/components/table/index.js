@@ -7,13 +7,13 @@ import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import TableFooter from "./TableFooter";
 
-const sortData = (column, reverse, altSortKey, data) => {
-  if (!column) {
+const sortData = (sortColumn, reverse, altSortKey, data) => {
+  if (!sortColumn) {
     return data;
   }
 
-  // Sort by altSortKey if exists otherwise sort by column
-  const sortedData = sortBy(data, [altSortKey || column]);
+  // Sort by altSortKey if exists otherwise sort by sortColumn
+  const sortedData = sortBy(data, [altSortKey || sortColumn]);
 
   return reverse ? sortedData.reverse() : sortedData;
 };
@@ -32,18 +32,18 @@ export default class TableSortable extends Component {
   };
 
   state = {
-    column: null,
+    sortColumn: null,
     reverse: false,
     altSortKey: null,
     direction: null
   };
 
   handleSort = (clickedColumn, altSortKey) => () => {
-    const { column, direction } = this.state;
+    const { sortColumn, direction, reverse } = this.state;
 
-    if (column !== clickedColumn) {
+    if (sortColumn !== clickedColumn) {
       this.setState({
-        column: clickedColumn,
+        sortColumn: clickedColumn,
         reverse: false,
         altSortKey,
         direction: "ascending"
@@ -53,21 +53,21 @@ export default class TableSortable extends Component {
     }
 
     this.setState({
-      reverse: true,
+      reverse: !reverse,
       direction: direction === "ascending" ? "descending" : "ascending"
     });
   };
 
   render() {
-    const { column, reverse, direction, altSortKey } = this.state;
+    const { sortColumn, reverse, direction, altSortKey } = this.state;
     const { tableHeaders, tableData, tableFooter } = this.props;
-    const sortedData = sortData(column, reverse, altSortKey, tableData);
+    const sortedData = sortData(sortColumn, reverse, altSortKey, tableData);
 
     return (
       <Table sortable celled striped unstackable>
         <TableHeader
           tableHeaders={tableHeaders}
-          sortColumn={column}
+          sortColumn={sortColumn}
           direction={direction}
           handleSort={this.handleSort}
         />
