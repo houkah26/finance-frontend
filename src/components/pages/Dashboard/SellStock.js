@@ -18,9 +18,9 @@ class SellStock extends Component {
   }
 
   render() {
-    const { portfolio } = this.props;
+    const { portfolio, isStockFetching } = this.props;
 
-    if (portfolio === null) {
+    if (isStockFetching && portfolio === null) {
       return <Loading />;
     } else if (portfolio.length === 0) {
       return <NoStockInPortfolio />;
