@@ -10,13 +10,14 @@ const Footer = () =>
   <div className="layout-footer">
     <Header size="small" textAlign="center">
       Brought to you by{" "}
-      <NewTabLink url="https://github.com/houkah26">Austin Houk</NewTabLink> |{" "}
+      <NewTabLink url="https://github.com/houkah26">Austin Houk </NewTabLink> |
+      Code:{" "}
       <NewTabLink url="https://github.com/houkah26/finance-frontend">
-        Front-End Code{" "}
-      </NewTabLink>{" "}
-      |{" "}
+        Front-End
+      </NewTabLink>
+      ,{" "}
       <NewTabLink url="https://github.com/houkah26/finance-backend">
-        Back-End Code
+        Back-End
       </NewTabLink>
     </Header>
   </div>;
