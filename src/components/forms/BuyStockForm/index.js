@@ -116,9 +116,7 @@ class BuyStockForm extends Component {
           success={quoteIsSuccesfull}
           onSubmit={handleSubmit(this.handleFormSubmit)}
         >
-          <Form.Group widths="equal">
-            {renderFields(inputFields)}
-          </Form.Group>
+          <Form.Group widths="equal">{renderFields(inputFields)}</Form.Group>
           <Form.Button loading={quoteIsLoading}>
             Calculate Transaction Cost
           </Form.Button>
@@ -131,7 +129,7 @@ class BuyStockForm extends Component {
         >
           <span
           >{`${numShares} shares of ${quoteSymbol} costs $${totalCost}.`}</span>
-          {quoteIsSuccesfull &&
+          {quoteIsSuccesfull && (
             <Button
               size="mini"
               positive
@@ -141,7 +139,8 @@ class BuyStockForm extends Component {
               loading={buyIsLoading}
             >
               Purchase
-            </Button>}
+            </Button>
+          )}
         </Message>
         <br />
         <Message error hidden={!buyContainsError}>
@@ -152,12 +151,10 @@ class BuyStockForm extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    cash: state.auth.user.cash,
-    buyErrorMessage: state.auth.errorMessage
-  };
-};
+const mapStateToProps = state => ({
+  cash: state.auth.user.cash,
+  buyErrorMessage: state.auth.errorMessage
+});
 
 const createForm = reduxForm({
   form: "buyStockForm",
