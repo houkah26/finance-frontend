@@ -2,11 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { Header, Button } from "semantic-ui-react";
 import MediaQuery from "react-responsive";
+import PropTypes from "prop-types";
 
 import { changeRoute } from "../../actions/routing";
 import { RESPONSIVE_LIMIT } from "../../constants";
 
-const HomePage = ({ changeRoute }) =>
+const HomePage = ({ authenticated, changeRoute }) => (
   <div>
     <Header>Welcome to React Finance</Header>
     <p>
@@ -22,12 +23,28 @@ const HomePage = ({ changeRoute }) =>
     </p>
     <br />
     <MediaQuery maxWidth={RESPONSIVE_LIMIT}>
-      <Button.Group size="large" fluid>
-        <Button onClick={() => changeRoute("/login")}>Login</Button>
-        <Button.Or />
-        <Button onClick={() => changeRoute("/register")}>Register</Button>
-      </Button.Group>
+      {authenticated ? (
+        <Button fluid onClick={() => changeRoute("/dashboard")}>
+          Go To Dashboard
+        </Button>
+      ) : (
+        <Button.Group size="large" fluid>
+          <Button onClick={() => changeRoute("/login")}>Login</Button>
+          <Button.Or />
+          <Button onClick={() => changeRoute("/register")}>Register</Button>
+        </Button.Group>
+      )}
     </MediaQuery>
-  </div>;
+  </div>
+);
 
-export default connect(null, { changeRoute })(HomePage);
+HomePage.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
+  changeRoute: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  authenticated: state.auth.authenticated
+});
+
+export default connect(mapStateToProps, { changeRoute })(HomePage);
