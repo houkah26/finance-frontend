@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-// import moment from "moment";
+import moment from "moment";
 
 import {
   FETCH_CHART_DATA_REQUEST,
@@ -7,6 +7,21 @@ import {
   FETCH_CHART_DATA_FAILURE,
   CLEAR_CHART_DATA
 } from "../actions/types.js";
+import chartDataTypes from "../components/charts/chartDataTypes";
+
+const formatData = (data, dataTypeRequested) => {
+  const { dateTimeFormat } = chartDataTypes[dataTypeRequested];
+
+  //  Convert data object to an array of objects
+  const dataArray = Object.keys(data).map(key => ({
+    dateTime: moment(key).format(dateTimeFormat),
+    value: parseFloat(data[key]["4. close"])
+  }));
+
+  //  Return a slice of array for desired time range
+  const endIndex = dataArray.findIndex(item => item.dateTime === "9:30 AM");
+  return dataArray.slice(0, endIndex + 1).reverse();
+};
 
 const chartData = () => {
   const data = (state = null, action) => {
@@ -15,7 +30,10 @@ const chartData = () => {
         const data = action.payload;
         const interval = data["Meta Data"]["4. Interval"];
 
-        return data[`Time Series (${interval})`];
+        return formatData(
+          data[`Time Series (${interval})`],
+          action.dataTypeRequested
+        );
       case CLEAR_CHART_DATA:
       case FETCH_CHART_DATA_FAILURE:
         return null;

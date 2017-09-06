@@ -1,7 +1,7 @@
 import React from "react";
 import { Header, Message } from "semantic-ui-react";
 import { connect } from "react-redux";
-import moment from "moment";
+// import moment from "moment";
 
 import LineChart from "./LineChart";
 import Loading from "../loading";
@@ -18,18 +18,18 @@ import {
   getChartDataDate
 } from "../../reducers";
 
-const mapData = data => {
-  return Object.keys(data).map(key => ({
-    dateTime: moment(key).format("h:mm A"),
-    value: parseFloat(data[key]["4. close"])
-  }));
-};
+// const mapData = data => {
+//   return Object.keys(data).map(key => ({
+//     dateTime: moment(key).format("h:mm A"),
+//     value: parseFloat(data[key]["4. close"])
+//   }));
+// };
 
-const formatData = data => {
-  const endIndex = data.findIndex(item => item.dateTime === "9:30 AM");
+// const formatData = data => {
+//   const endIndex = data.findIndex(item => item.dateTime === "9:30 AM");
 
-  return data.slice(0, endIndex + 1).reverse();
-};
+//   return data.slice(0, endIndex + 1).reverse();
+// };
 
 const LineChartContainer = ({
   isFetching,
@@ -55,7 +55,7 @@ const LineChartContainer = ({
       !isFetching && (
         <Header textAlign="center">{`${quoteName} (${quoteSymbol}), Current Price: $${quotePrice}`}</Header>
       )}
-      {chartData && <LineChart data={formatData(mapData(chartData))} />}
+      {chartData && <LineChart data={chartData} />}
     </div>
   );
 };

@@ -6,6 +6,7 @@ import {
   FETCH_CHART_DATA_FAILURE,
   CLEAR_CHART_DATA
 } from "../types.js";
+import chartDataTypes from "../../components/charts/chartDataTypes";
 import { AV_API_URL, AV_API_KEY } from "../../constants";
 import errorHandler from "../handlers/errorHandler";
 import { getIsChartDataFetching } from "../../reducers/index";
@@ -25,14 +26,6 @@ export const fetchChartData = (stockSymbol, dataTypeRequested) => (
     type: FETCH_CHART_DATA_REQUEST
   });
 
-  const chartDataTypes = {
-    day: {
-      seriesType: "TIME_SERIES_INTRADAY",
-      interval: "5min",
-      size: "compact"
-    }
-  };
-
   const { seriesType, interval, size } = chartDataTypes[dataTypeRequested];
   console.log(
     `${AV_API_URL}function=${seriesType}&symbol=${stockSymbol}&interval=${interval}&outputsize=${size}&apikey=${AV_API_KEY}`
@@ -45,7 +38,8 @@ export const fetchChartData = (stockSymbol, dataTypeRequested) => (
     .then(response => {
       dispatch({
         type: FETCH_CHART_DATA_SUCCESS,
-        payload: response.data
+        payload: response.data,
+        dataTypeRequested
       });
     })
     .catch(error => {
