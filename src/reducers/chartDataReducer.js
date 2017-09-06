@@ -8,13 +8,6 @@ import {
   CLEAR_CHART_DATA
 } from "../actions/types.js";
 
-// const mapData = data => {
-//   return Object.keys(data).map(key => ({
-//     dateTime: moment(key).format("h:mm A"),
-//     value: parseFloat(data[key]["4. close"])
-//   }));
-// };
-
 const chartData = () => {
   const data = (state = null, action) => {
     switch (action.type) {
@@ -24,6 +17,7 @@ const chartData = () => {
 
         return data[`Time Series (${interval})`];
       case CLEAR_CHART_DATA:
+      case FETCH_CHART_DATA_FAILURE:
         return null;
       default:
         return state;
@@ -35,6 +29,7 @@ const chartData = () => {
       case FETCH_CHART_DATA_SUCCESS:
         return action.payload["Meta Data"]["3. Last Refreshed"].split(" ")[0];
       case CLEAR_CHART_DATA:
+      case FETCH_CHART_DATA_FAILURE:
         return null;
       default:
         return state;

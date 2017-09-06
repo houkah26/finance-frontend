@@ -20,6 +20,7 @@ const quote = () => {
           name: data.stockName
         };
       case CLEAR_QUOTE:
+      case FETCH_QUOTE_FAILURE:
         return {};
       default:
         return state;
