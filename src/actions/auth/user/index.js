@@ -3,7 +3,7 @@ import cookie from "react-cookie";
 import { push } from "react-router-redux";
 
 import errorHandler from "../../handlers/errorHandler";
-import { UPDATE_USER, AUTH_ERROR } from "../../types";
+import { UPDATE_USER, AUTH_ERROR, CLEAR_ERROR } from "../../types";
 import { API_URL } from "../../../constants";
 
 //= =====================
@@ -29,6 +29,10 @@ export const addFunds = fundAmount => dispatch => {
 };
 
 export const buyStock = (stockSymbol, shares) => dispatch => {
+  dispatch({
+    type: CLEAR_ERROR
+  });
+
   const reqBody = {
     stockSymbol,
     shares,
