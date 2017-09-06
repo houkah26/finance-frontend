@@ -87,7 +87,7 @@ const stock = listType => {
     }
   };
 
-  const errorMessage = (state = null, action) => {
+  const errorMessage = (state = "", action) => {
     if (action.listType !== listType) {
       return state;
     }
@@ -95,7 +95,7 @@ const stock = listType => {
     switch (action.type) {
       case FETCH_STOCK_REQUEST:
       case FETCH_STOCK_SUCCESS:
-        return null;
+        return "";
       case FETCH_STOCK_FAILURE:
         return action.payload;
       default:
