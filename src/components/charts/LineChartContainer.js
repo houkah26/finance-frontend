@@ -10,6 +10,7 @@ import {
   getQuoteName,
   getQuoteSymbol,
   getQuotePrice,
+  getQuoteErrorMessage,
   getIsChartDataFetching,
   getIsQuoteFetching,
   getChartDataErrorMessage,
@@ -32,13 +33,16 @@ const formatData = data => {
 
 const LineChartContainer = ({
   isFetching,
-  errorMessage,
+  chartDataErrorMessage,
   quoteName,
   quotePrice,
   quoteSymbol,
+  quoteErrorMessage,
   chartData
 }) => {
-  const containsError = errorMessage.length > 0;
+  const displayError =
+    chartDataErrorMessage.length > 0 &&
+    quoteErrorMessage !== "Invalid stock symbol";
 
   if (isFetching) {
     return <Loading />;
@@ -46,7 +50,7 @@ const LineChartContainer = ({
 
   return (
     <div>
-      <Message error content={errorMessage} hidden={!containsError} />
+      <Message error content={chartDataErrorMessage} hidden={!displayError} />
       {quoteName &&
       !isFetching && (
         <Header textAlign="center">{`${quoteName} (${quoteSymbol}), Current Price: $${quotePrice}`}</Header>
@@ -60,10 +64,11 @@ const mapStateToProps = state => ({
   chartData: getChartDataData(state),
   chartDate: getChartDataDate(state),
   isFetching: getIsChartDataFetching(state) || getIsQuoteFetching(state),
-  errorMessage: getChartDataErrorMessage(state),
+  chartDataErrorMessage: getChartDataErrorMessage(state),
   quoteName: getQuoteName(state),
   quotePrice: getQuotePrice(state),
-  quoteSymbol: getQuoteSymbol(state)
+  quoteSymbol: getQuoteSymbol(state),
+  quoteErrorMessage: getQuoteErrorMessage(state)
 });
 
 export default connect(mapStateToProps)(LineChartContainer);
