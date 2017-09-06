@@ -27,12 +27,8 @@ class QuoteStockForm extends Component {
   handleFormSubmit = ({ stockSymbol }) => {
     const symbol = stockSymbol.toUpperCase();
 
-    const dataType = "TIME_SERIES_INTRADAY";
-    const interval = "5min";
-    const size = "compact";
-
     this.props.fetchQuote(symbol);
-    this.props.fetchChartData(symbol, dataType, interval, size);
+    this.props.fetchChartData(symbol, "day");
   };
 
   render() {

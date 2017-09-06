@@ -13,7 +13,7 @@ import { getIsChartDataFetching } from "../../reducers/index";
 //= =====================
 // ChartData Action Creators
 //= =====================
-export const fetchChartData = (stockSymbol, dataType, interval, size) => (
+export const fetchChartData = (stockSymbol, dataTypeRequested) => (
   dispatch,
   getState
 ) => {
@@ -25,9 +25,22 @@ export const fetchChartData = (stockSymbol, dataType, interval, size) => (
     type: FETCH_CHART_DATA_REQUEST
   });
 
+  const chartDataTypes = {
+    day: {
+      seriesType: "TIME_SERIES_INTRADAY",
+      interval: "5min",
+      size: "compact"
+    }
+  };
+
+  const { seriesType, interval, size } = chartDataTypes[dataTypeRequested];
+  console.log(
+    `${AV_API_URL}function=${seriesType}&symbol=${stockSymbol}&interval=${interval}&outputsize=${size}&apikey=${AV_API_KEY}`
+  );
+
   axios
     .get(
-      `${AV_API_URL}function=${dataType}&symbol=${stockSymbol}&interval=${interval}&outputsize=${size}&apikey=${AV_API_KEY}`
+      `${AV_API_URL}function=${seriesType}&symbol=${stockSymbol}&interval=${interval}&outputsize=${size}&apikey=${AV_API_KEY}`
     )
     .then(response => {
       dispatch({
