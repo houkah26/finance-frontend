@@ -89,6 +89,7 @@ class BuyStockForm extends Component {
     });
 
     const { quoteSymbol, numShares } = this.state;
+    // On success buy stock will redirect to dashboard
     this.props.buyStock(quoteSymbol, numShares);
   };
 
@@ -136,7 +137,7 @@ class BuyStockForm extends Component {
               compact
               floated="right"
               onClick={this.handleBuyClick}
-              loading={buyIsLoading}
+              loading={buyIsLoading && !buyContainsError}
             >
               Purchase
             </Button>
