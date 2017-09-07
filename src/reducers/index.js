@@ -45,7 +45,7 @@ export const getQuoteErrorMessage = state =>
 
 // Chart Data Selectors ----------------------------------------
 export const getChartDataData = state => fromChartData.getData(state.chartData);
-export const getChartDataDate = state => fromChartData.getDate(state.chartData);
+export const getChartDataType = state => fromChartData.getType(state.chartData);
 export const getIsChartDataFetching = state =>
   fromChartData.getIsFetching(state.chartData);
 

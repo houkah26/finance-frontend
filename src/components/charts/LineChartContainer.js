@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import LineChart from "./LineChart";
 import Loading from "../loading";
 
+import chartDataTypes from "../charts/chartDataTypes";
 import {
   getQuoteName,
   getQuoteSymbol,
@@ -15,7 +16,7 @@ import {
   getIsQuoteFetching,
   getChartDataErrorMessage,
   getChartDataData,
-  getChartDataDate
+  getChartDataType
 } from "../../reducers";
 
 // const mapData = data => {
@@ -38,7 +39,8 @@ const LineChartContainer = ({
   quotePrice,
   quoteSymbol,
   quoteErrorMessage,
-  chartData
+  chartData,
+  chartDataType
 }) => {
   const displayError =
     chartDataErrorMessage.length > 0 &&
@@ -55,14 +57,19 @@ const LineChartContainer = ({
       !isFetching && (
         <Header textAlign="center">{`${quoteName} (${quoteSymbol}), Current Price: $${quotePrice}`}</Header>
       )}
-      {chartData && <LineChart data={chartData} />}
+      {chartData && (
+        <LineChart
+          data={chartData}
+          axisInterval={chartDataTypes[chartDataType].axisInterval}
+        />
+      )}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
   chartData: getChartDataData(state),
-  chartDate: getChartDataDate(state),
+  chartDataType: getChartDataType(state),
   isFetching: getIsChartDataFetching(state) || getIsQuoteFetching(state),
   chartDataErrorMessage: getChartDataErrorMessage(state),
   quoteName: getQuoteName(state),

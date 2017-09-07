@@ -9,30 +9,57 @@ import {
 } from "../actions/types.js";
 import chartDataTypes from "../components/charts/chartDataTypes";
 
-const formatData = (data, dataTypeRequested) => {
-  const { dateTimeFormat } = chartDataTypes[dataTypeRequested];
+const formatData = (data, dataTypeRequested, latestDataDate) => {
+  const { axisTickFormat, minDataOffset, toolTipFormat } = chartDataTypes[dataTypeRequested];
 
   //  Convert data object to an array of objects
-  const dataArray = Object.keys(data).map(key => ({
-    dateTime: moment(key).format(dateTimeFormat),
-    value: parseFloat(data[key]["4. close"])
-  }));
+  const dataArray = Object.keys(data).map(key => {
+    const date = moment(key);
 
-  //  Return a slice of array for desired time range
-  const endIndex = dataArray.findIndex(item => item.dateTime === "9:30 AM");
-  return dataArray.slice(0, endIndex + 1).reverse();
+    return {
+      time: date.format("HH:mm"),
+      axisLabel: date.format(axisTickFormat),
+      toolTipLabel: date.format(toolTipFormat),
+      value: parseFloat(data[key]["4. close"])
+    };
+  });
+  console.log(dataArray);
+  //  Start index of chartData
+  const startIndex = findStartIndex(dataArray, minDataOffset)
+  console.log(startIndex, minDataOffset);
+
+  // const endIndex = dataArray.findIndex(item => item.axisLabel === "9:30 AM");
+  return dataArray.slice(0, startIndex + 1).reverse();
 };
+
+// const startDate = (dataTypeRequested) => {
+//   switch (dataTypeRequested) {
+//     case 'week':
+//       return 
+//   }
+// }
+
+// Start index of data
+const findStartIndex = (dataArray, minDataOffset) => {
+  for (let i = minDataOffset; i < dataArray.length; i++) {
+    if (dataArray[i].time === "09:30") {
+      return i;
+    }
+  }
+}
 
 const chartData = () => {
   const data = (state = null, action) => {
     switch (action.type) {
       case FETCH_CHART_DATA_SUCCESS:
         const data = action.payload;
-        const interval = data["Meta Data"]["4. Interval"];
-
+        const metaData = data["Meta Data"]
+        const interval = metaData["4. Interval"];
+        const latestDataDate = metaData["3. Last Refreshed"].split(" ")[0] // date in form of yyyy/mm/dd
         return formatData(
           data[`Time Series (${interval})`],
-          action.dataTypeRequested
+          action.dataTypeRequested,
+          latestDataDate
         );
       case CLEAR_CHART_DATA:
       case FETCH_CHART_DATA_FAILURE:
@@ -42,13 +69,25 @@ const chartData = () => {
     }
   };
 
-  const date = (state = "", action) => {
+  // const date = (state = "", action) => {
+  //   switch (action.type) {
+  //     case FETCH_CHART_DATA_SUCCESS:
+  //       return action.payload["Meta Data"]["3. Last Refreshed"].split(" ")[0];
+  //     case CLEAR_CHART_DATA:
+  //     case FETCH_CHART_DATA_FAILURE:
+  //       return null;
+  //     default:
+  //       return state;
+  //   }
+  // };
+
+  const dataType = (state = "", action) => {
     switch (action.type) {
       case FETCH_CHART_DATA_SUCCESS:
-        return action.payload["Meta Data"]["3. Last Refreshed"].split(" ")[0];
+        return action.dataTypeRequested;
       case CLEAR_CHART_DATA:
       case FETCH_CHART_DATA_FAILURE:
-        return null;
+        return "";
       default:
         return state;
     }
@@ -79,12 +118,12 @@ const chartData = () => {
     }
   };
 
-  return combineReducers({ data, date, isFetching, errorMessage });
+  return combineReducers({ data, dataType, isFetching, errorMessage });
 };
 
 export default chartData;
 
 export const getData = state => state.data;
-export const getDate = state => state.date;
+export const getType = state => state.dataType;
 export const getIsFetching = state => state.isFetching;
 export const getErrorMessage = state => state.errorMessage;

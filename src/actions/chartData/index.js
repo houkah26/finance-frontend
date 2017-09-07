@@ -26,14 +26,11 @@ export const fetchChartData = (stockSymbol, dataTypeRequested) => (
     type: FETCH_CHART_DATA_REQUEST
   });
 
-  const { seriesType, interval, size } = chartDataTypes[dataTypeRequested];
-  console.log(
-    `${AV_API_URL}function=${seriesType}&symbol=${stockSymbol}&interval=${interval}&outputsize=${size}&apikey=${AV_API_KEY}`
-  );
+  const { seriesType, dataInterval, size } = chartDataTypes[dataTypeRequested];
 
   axios
     .get(
-      `${AV_API_URL}function=${seriesType}&symbol=${stockSymbol}&interval=${interval}&outputsize=${size}&apikey=${AV_API_KEY}`
+      `${AV_API_URL}function=${seriesType}&symbol=${stockSymbol}&interval=${dataInterval}&outputsize=${size}&apikey=${AV_API_KEY}`
     )
     .then(response => {
       dispatch({
