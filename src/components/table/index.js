@@ -7,6 +7,8 @@ import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import TableFooter from "./TableFooter";
 
+import './index.css'
+
 const sortData = (sortColumn, reverse, altSortKey, data) => {
   if (!sortColumn) {
     return data;
@@ -64,16 +66,18 @@ export default class TableSortable extends Component {
     const sortedData = sortData(sortColumn, reverse, altSortKey, tableData);
 
     return (
-      <Table sortable celled striped unstackable>
-        <TableHeader
-          tableHeaders={tableHeaders}
-          sortColumn={sortColumn}
-          direction={direction}
-          handleSort={this.handleSort}
-        />
-        <TableBody tableData={sortedData} tableHeaders={tableHeaders} />
-        {tableFooter && <TableFooter tableFooter={tableFooter} />}
-      </Table>
+      <div className="table-container">
+        <Table sortable celled striped unstackable>
+          <TableHeader
+            tableHeaders={tableHeaders}
+            sortColumn={sortColumn}
+            direction={direction}
+            handleSort={this.handleSort}
+          />
+          <TableBody tableData={sortedData} tableHeaders={tableHeaders} />
+          {tableFooter && <TableFooter tableFooter={tableFooter} />}
+        </Table>
+      </div>
     );
   }
 }
