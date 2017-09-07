@@ -7,11 +7,10 @@ import {
   FETCH_CHART_DATA_FAILURE,
   CLEAR_CHART_DATA
 } from "../actions/types.js";
-import chartDataTypes from "../components/charts/chartDataTypes";
+import chartDataTypes from "../components/chart/chartDataTypes";
 
-const formatData = (data, dataTypeRequested, latestDataDate) => {
+const formatData = (data, dataTypeRequested) => {
   const { axisTickFormat, minDataOffset, toolTipFormat } = chartDataTypes[dataTypeRequested];
-
   //  Convert data object to an array of objects
   const dataArray = Object.keys(data).map(key => {
     const date = moment(key);
@@ -23,11 +22,9 @@ const formatData = (data, dataTypeRequested, latestDataDate) => {
       value: parseFloat(data[key]["4. close"])
     };
   });
-  console.log(dataArray);
+  
   //  Start index of chartData
-  const startIndex = findStartIndex(dataArray, minDataOffset)
-  console.log(startIndex, minDataOffset);
-
+  const startIndex = chartDataTypes[dataTypeRequested].seriesType === "TIME_SERIES_INTRADAY" ? findStartOfDatIndex(dataArray, minDataOffset) : minDataOffset;
   // const endIndex = dataArray.findIndex(item => item.axisLabel === "9:30 AM");
   return dataArray.slice(0, startIndex + 1).reverse();
 };
@@ -40,7 +37,7 @@ const formatData = (data, dataTypeRequested, latestDataDate) => {
 // }
 
 // Start index of data
-const findStartIndex = (dataArray, minDataOffset) => {
+const findStartOfDatIndex = (dataArray, minDataOffset) => {
   for (let i = minDataOffset; i < dataArray.length; i++) {
     if (dataArray[i].time === "09:30") {
       return i;
@@ -53,13 +50,14 @@ const chartData = () => {
     switch (action.type) {
       case FETCH_CHART_DATA_SUCCESS:
         const data = action.payload;
-        const metaData = data["Meta Data"]
-        const interval = metaData["4. Interval"];
-        const latestDataDate = metaData["3. Last Refreshed"].split(" ")[0] // date in form of yyyy/mm/dd
+        const { dataTypeRequested } = action;
+        // const metaData = data["Meta Data"]
+        // const interval = metaData["4. Interval"];
+        const interval = chartDataTypes[dataTypeRequested].dataInterval;
+        // const latestDataDate = metaData["3. Last Refreshed"].split(" ")[0] // date in form of yyyy/mm/dd
         return formatData(
           data[`Time Series (${interval})`],
-          action.dataTypeRequested,
-          latestDataDate
+          dataTypeRequested,
         );
       case CLEAR_CHART_DATA:
       case FETCH_CHART_DATA_FAILURE:

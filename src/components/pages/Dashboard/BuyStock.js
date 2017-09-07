@@ -7,7 +7,7 @@ import { clearQuote } from "../../../actions/quote";
 
 import QuoteStockForm from "../../forms/QuoteStockForm";
 import BuyStockForm from "../../forms/BuyStockForm";
-import LineChartContainer from "../../charts/LineChartContainer";
+import LineChartContainer from "../../chart";
 
 class BuyStock extends Component {
   componentDidMount() {

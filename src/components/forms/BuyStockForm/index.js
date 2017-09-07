@@ -129,7 +129,7 @@ class BuyStockForm extends Component {
           hidden={!quoteIsSuccesfull}
         >
           <span
-          >{`${numShares} shares of ${quoteSymbol} costs $${totalCost}.`}</span>
+          >{`${numShares} shares of ${quoteSymbol} costs $${totalCost.toFixed(2)}`}</span>
           {quoteIsSuccesfull && (
             <Button
               size="mini"

@@ -1,12 +1,12 @@
 import React from "react";
-import { Header, Message } from "semantic-ui-react";
+import { Header, Message, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
 // import moment from "moment";
 
 import LineChart from "./LineChart";
 import Loading from "../loading";
 
-import chartDataTypes from "../charts/chartDataTypes";
+import chartDataTypes from "./chartDataTypes";
 import {
   getQuoteName,
   getQuoteSymbol,
@@ -18,6 +18,9 @@ import {
   getChartDataData,
   getChartDataType
 } from "../../reducers";
+import { fetchChartData } from '../../actions/chartData'
+
+import './index.css'
 
 // const mapData = data => {
 //   return Object.keys(data).map(key => ({
@@ -40,28 +43,47 @@ const LineChartContainer = ({
   quoteSymbol,
   quoteErrorMessage,
   chartData,
-  chartDataType
+  chartDataType,
+  fetchChartData
 }) => {
   const displayError =
     chartDataErrorMessage.length > 0 &&
     quoteErrorMessage !== "Invalid stock symbol";
+
+  const renderChartHeader = () => {
+    const options = Object.keys(chartDataTypes).map(type => ({
+      text: type,
+      value: type
+    }))
+
+    const handleChange = (event, data) => {
+      fetchChartData(quoteSymbol, data.value);
+    }
+
+    return (
+        <div className="header-container">
+          <Header textAlign="center">{`${quoteName} (${quoteSymbol}), Current Price: $${quotePrice}`}</Header>
+          <Dropdown inline options={options} defaultValue={chartDataType} onChange={handleChange}/>
+        </div>
+    )
+  }
 
   if (isFetching) {
     return <Loading />;
   }
 
   return (
-    <div>
+    <div className="chart-container">
       <Message error content={chartDataErrorMessage} hidden={!displayError} />
       {quoteName &&
-      !isFetching && (
-        <Header textAlign="center">{`${quoteName} (${quoteSymbol}), Current Price: $${quotePrice}`}</Header>
-      )}
+      !isFetching &&renderChartHeader()}
       {chartData && (
-        <LineChart
-          data={chartData}
-          axisInterval={chartDataTypes[chartDataType].axisInterval}
-        />
+        <div className="chart-wrapper">
+          <LineChart
+            data={chartData}
+            axisInterval={chartDataTypes[chartDataType].axisInterval}
+          />
+        </div>
       )}
     </div>
   );
@@ -78,4 +100,4 @@ const mapStateToProps = state => ({
   quoteErrorMessage: getQuoteErrorMessage(state)
 });
 
-export default connect(mapStateToProps)(LineChartContainer);
+export default connect(mapStateToProps, { fetchChartData })(LineChartContainer);

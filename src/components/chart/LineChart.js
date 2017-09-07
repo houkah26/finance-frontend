@@ -9,11 +9,11 @@ import {
   ResponsiveContainer
 } from "recharts";
 import CustomizedAxisTick from "./CustomizedAxisTick";
-import CustomToolTip from './CustomToolTip';
+import CustomToolTip from "./CustomToolTip";
 
 const CustomLineChart = ({ data, axisInterval }) => (
-  <ResponsiveContainer width="100%" height={400}>
-    <LineChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+  <ResponsiveContainer width="100%" height={400} minWidth={500}>
+    <LineChart data={data} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
       <XAxis
         dataKey="axisLabel"
         height={75}
@@ -25,7 +25,7 @@ const CustomLineChart = ({ data, axisInterval }) => (
       />
       <YAxis type="number" domain={["auto", "auto"]} />
       <CartesianGrid horizontal={false} strokeDasharray="3 3" />
-      <Tooltip content={<CustomToolTip />}/>
+      <Tooltip content={<CustomToolTip />} />
       <Line
         isAnimationActive={false}
         type="linear"

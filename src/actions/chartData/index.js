@@ -6,7 +6,7 @@ import {
   FETCH_CHART_DATA_FAILURE,
   CLEAR_CHART_DATA
 } from "../types.js";
-import chartDataTypes from "../../components/charts/chartDataTypes";
+import chartDataTypes from "../../components/chart/chartDataTypes";
 import { AV_API_URL, AV_API_KEY } from "../../constants";
 import errorHandler from "../handlers/errorHandler";
 import { getIsChartDataFetching } from "../../reducers/index";

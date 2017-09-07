@@ -28,7 +28,7 @@ class QuoteStockForm extends Component {
     const symbol = stockSymbol.toUpperCase();
 
     this.props.fetchQuote(symbol);
-    this.props.fetchChartData(symbol, "week");
+    this.props.fetchChartData(symbol, "day");
   };
 
   render() {
