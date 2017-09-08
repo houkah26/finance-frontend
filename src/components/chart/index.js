@@ -62,7 +62,7 @@ const LineChartContainer = ({
 
     return (
         <div className="header-container">
-          <Header textAlign="center">{`${quoteName} (${quoteSymbol}), Current Price: $${quotePrice}`}</Header>
+          <Header >{`${quoteName} (${quoteSymbol}), Current Price: $${quotePrice}`}</Header>
           <Dropdown inline options={options} defaultValue={chartDataType} onChange={handleChange}/>
         </div>
     )

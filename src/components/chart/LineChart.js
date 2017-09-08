@@ -16,7 +16,7 @@ const CustomLineChart = ({ data, axisInterval }) => (
     <LineChart data={data} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
       <XAxis
         dataKey="axisLabel"
-        height={75}
+        height={50}
         tick={<CustomizedAxisTick />}
         // tick={{ stroke: "red", strokeWidth: 0.01, size: 0 }}
         // tickCount={4}
@@ -31,6 +31,7 @@ const CustomLineChart = ({ data, axisInterval }) => (
         type="linear"
         dataKey="value"
         stroke="#8884d8"
+        strokeWidth={3}
         dot={false}
         activeDot={{ r: 8 }}
       />
