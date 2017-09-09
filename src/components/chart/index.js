@@ -1,10 +1,11 @@
 import React from "react";
-import { Header, Message, Dropdown } from "semantic-ui-react";
+import { Message } from "semantic-ui-react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import LineChart from "./LineChart";
 import Loading from "../loading";
+import ChartHeader from "./ChartHeader";
 
 import chartDataTypes from "./chartDataTypes";
 import {
@@ -37,28 +38,13 @@ const LineChartContainer = ({
     chartDataErrorMessage.length > 0 &&
     quoteErrorMessage !== "Invalid stock symbol";
 
-  const renderChartHeader = () => {
-    const options = Object.keys(chartDataTypes).map(type => ({
-      text: type,
-      value: type
-    }));
+  const dropdownOptions = Object.keys(chartDataTypes).map(type => ({
+    text: type,
+    value: type
+  }));
 
-    const handleChange = (event, data) => {
-      fetchChartData(quoteSymbol, data.value);
-    };
-
-    return (
-      <div className="header-container">
-        <Header
-        >{`${quoteName} (${quoteSymbol}), Current Price: $${quotePrice}`}</Header>
-        <Dropdown
-          inline
-          options={options}
-          defaultValue={chartDataType}
-          onChange={handleChange}
-        />
-      </div>
-    );
+  const handleDropdownChange = (event, data) => {
+    fetchChartData(quoteSymbol, data.value);
   };
 
   if (isFetching) {
@@ -68,7 +54,17 @@ const LineChartContainer = ({
   return (
     <div className="chart-container">
       <Message error content={chartDataErrorMessage} hidden={!displayError} />
-      {quoteName && !isFetching && renderChartHeader()}
+      {quoteName &&
+      !isFetching && (
+        <ChartHeader
+          quoteName={quoteName}
+          quotePrice={quotePrice}
+          quoteSymbol={quoteSymbol}
+          dropdownOptions={dropdownOptions}
+          chartDataType={chartDataType}
+          handleDropdownChange={handleDropdownChange}
+        />
+      )}
       {chartData && (
         <div className="chart-wrapper">
           <LineChart
