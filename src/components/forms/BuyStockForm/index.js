@@ -5,13 +5,11 @@ import { Form, Message, Header, Button } from "semantic-ui-react";
 import axios from "axios";
 import cookie from "react-cookie";
 import { round } from "lodash";
+import PropTypes from "prop-types";
 
 import { isPositiveInt } from "../helperFunctions";
-
 import { buyStock } from "../../../actions/auth/user";
-
 import { API_URL } from "../../../constants";
-
 import renderFields from "../components/renderFields";
 
 import "./BuyStockForm.css";
@@ -51,6 +49,11 @@ const validate = (formProps, props) => {
 };
 
 class BuyStockForm extends Component {
+  static propTypes = {
+    buyErrorMessage: PropTypes.string,
+    buyStock: PropTypes.string.isRequired
+  };
+
   state = inititalState;
 
   handleFormSubmit = formProps => {
@@ -129,7 +132,9 @@ class BuyStockForm extends Component {
           hidden={!quoteIsSuccesfull}
         >
           <span
-          >{`${numShares} shares of ${quoteSymbol} costs $${totalCost.toFixed(2)}`}</span>
+          >{`${numShares} shares of ${quoteSymbol} costs $${totalCost.toFixed(
+            2
+          )}`}</span>
           {quoteIsSuccesfull && (
             <Button
               size="mini"
@@ -153,7 +158,6 @@ class BuyStockForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  cash: state.auth.user.cash,
   buyErrorMessage: state.auth.errorMessage
 });
 
