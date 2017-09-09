@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import { clearChartData } from "../../../actions/chartData";
 import { clearQuote } from "../../../actions/quote";
@@ -10,6 +11,11 @@ import BuyStockForm from "../../forms/BuyStockForm";
 import ChartContainer from "../../chart";
 
 class BuyStock extends Component {
+  static propTypes = {
+    clearQuote: PropTypes.func.isRequired,
+    clearChartData: PropTypes.func.isRequired
+  };
+
   componentDidMount() {
     this.props.clearQuote();
     this.props.clearChartData();
