@@ -1,7 +1,7 @@
 import React from "react";
 import { Header, Message, Dropdown } from "semantic-ui-react";
 import { connect } from "react-redux";
-// import moment from "moment";
+import PropTypes from "prop-types";
 
 import LineChart from "./LineChart";
 import Loading from "../loading";
@@ -18,22 +18,9 @@ import {
   getChartDataData,
   getChartDataType
 } from "../../reducers";
-import { fetchChartData } from '../../actions/chartData'
+import { fetchChartData } from "../../actions/chartData";
 
-import './index.css'
-
-// const mapData = data => {
-//   return Object.keys(data).map(key => ({
-//     dateTime: moment(key).format("h:mm A"),
-//     value: parseFloat(data[key]["4. close"])
-//   }));
-// };
-
-// const formatData = data => {
-//   const endIndex = data.findIndex(item => item.dateTime === "9:30 AM");
-
-//   return data.slice(0, endIndex + 1).reverse();
-// };
+import "./index.css";
 
 const LineChartContainer = ({
   isFetching,
@@ -54,19 +41,25 @@ const LineChartContainer = ({
     const options = Object.keys(chartDataTypes).map(type => ({
       text: type,
       value: type
-    }))
+    }));
 
     const handleChange = (event, data) => {
       fetchChartData(quoteSymbol, data.value);
-    }
+    };
 
     return (
-        <div className="header-container">
-          <Header >{`${quoteName} (${quoteSymbol}), Current Price: $${quotePrice}`}</Header>
-          <Dropdown inline options={options} defaultValue={chartDataType} onChange={handleChange}/>
-        </div>
-    )
-  }
+      <div className="header-container">
+        <Header
+        >{`${quoteName} (${quoteSymbol}), Current Price: $${quotePrice}`}</Header>
+        <Dropdown
+          inline
+          options={options}
+          defaultValue={chartDataType}
+          onChange={handleChange}
+        />
+      </div>
+    );
+  };
 
   if (isFetching) {
     return <Loading />;
@@ -75,8 +68,7 @@ const LineChartContainer = ({
   return (
     <div className="chart-container">
       <Message error content={chartDataErrorMessage} hidden={!displayError} />
-      {quoteName &&
-      !isFetching &&renderChartHeader()}
+      {quoteName && !isFetching && renderChartHeader()}
       {chartData && (
         <div className="chart-wrapper">
           <LineChart
@@ -87,6 +79,18 @@ const LineChartContainer = ({
       )}
     </div>
   );
+};
+
+LineChartContainer.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  chartDataErrorMessage: PropTypes.string,
+  quoteName: PropTypes.string,
+  quotePrice: PropTypes.string,
+  quoteSymbol: PropTypes.string,
+  quoteErrorMessage: PropTypes.string,
+  chartData: PropTypes.array,
+  chartDataType: PropTypes.string,
+  fetchChartData: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

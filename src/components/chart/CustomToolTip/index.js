@@ -1,8 +1,9 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './index.css'
+import "./index.css";
 
-const CustomTooltip  = ({ active, label, payload }) => {
+const CustomTooltip = ({ active, payload }) => {
   if (active) {
     return (
       <div className="custom-tool-tip">
@@ -12,12 +13,13 @@ const CustomTooltip  = ({ active, label, payload }) => {
     );
   }
   return null;
-}
+};
 
-// propTypes: {
-//   type: PropTypes.string,
-//   payload: PropTypes.array,
-//   label: PropTypes.string,
-// }
+CustomTooltip.propTypes = {
+  active: PropTypes.bool.isRequired,
+  payload: PropTypes.array.isRequired,
+  label: PropTypes.string,
+  type: PropTypes.string
+};
 
 export default CustomTooltip;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const CustomizedAxisTick = ({ x, y, stroke, payload }) => (
   <g transform={`translate(${x},${y})`}>
@@ -14,5 +15,12 @@ const CustomizedAxisTick = ({ x, y, stroke, payload }) => (
     </text>
   </g>
 );
+
+CustomizedAxisTick.propTypes = {
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+  stroke: PropTypes.number,
+  payload: PropTypes.object.isRequired
+};
 
 export default CustomizedAxisTick;

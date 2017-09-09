@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   LineChart,
   Line,
@@ -18,9 +19,6 @@ const CustomLineChart = ({ data, axisInterval }) => (
         dataKey="axisLabel"
         height={50}
         tick={<CustomizedAxisTick />}
-        // tick={{ stroke: "red", strokeWidth: 0.01, size: 0 }}
-        // tickCount={4}
-        // allowDataOverflow={true}
         interval={axisInterval}
       />
       <YAxis type="number" domain={["auto", "auto"]} />
@@ -38,5 +36,10 @@ const CustomLineChart = ({ data, axisInterval }) => (
     </LineChart>
   </ResponsiveContainer>
 );
+
+CustomLineChart.propTypes = {
+  data: PropTypes.array.isRequired,
+  axisInterval: PropTypes.number.isRequired
+};
 
 export default CustomLineChart;
