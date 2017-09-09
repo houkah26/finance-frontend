@@ -10,7 +10,7 @@ import {
 import chartDataTypes from "../components/chart/chartDataTypes";
 
 const formatData = (data, dataTypeRequested) => {
-  const { axisTickFormat, minDataOffset, toolTipFormat } = chartDataTypes[dataTypeRequested];
+  const { axisTickFormat, minDataPoints, toolTipFormat, seriesType } = chartDataTypes[dataTypeRequested];
   //  Convert data object to an array of objects
   const dataArray = Object.keys(data).map(key => {
     const date = moment(key);
@@ -24,21 +24,25 @@ const formatData = (data, dataTypeRequested) => {
   });
   
   //  Start index of chartData
-  const startIndex = chartDataTypes[dataTypeRequested].seriesType === "TIME_SERIES_INTRADAY" ? findStartOfDatIndex(dataArray, minDataOffset) : minDataOffset;
-  // const endIndex = dataArray.findIndex(item => item.axisLabel === "9:30 AM");
+  const startIndex = findStartIndex(seriesType, dataArray, minDataPoints)
+
   return dataArray.slice(0, startIndex + 1).reverse();
 };
 
-// const startDate = (dataTypeRequested) => {
-//   switch (dataTypeRequested) {
-//     case 'week':
-//       return 
-//   }
-// }
+const findStartIndex = (seriesType, dataArray, minDataPoints) => {
+  switch (seriesType) {
+    case "TIME_SERIES_INTRADAY":
+      return findStartOfDayIndex(dataArray, minDataPoints);
+    case "TIME_SERIES_DAILY":
+      return minDataPoints;
+    default:
+      return dataArray.length - 1;
+  }
+}
 
 // Start index of data
-const findStartOfDatIndex = (dataArray, minDataOffset) => {
-  for (let i = minDataOffset; i < dataArray.length; i++) {
+const findStartOfDayIndex = (dataArray, minDataPoints) => {
+  for (let i = minDataPoints; i < dataArray.length; i++) {
     if (dataArray[i].time === "09:30") {
       return i;
     }
@@ -50,13 +54,13 @@ const chartData = () => {
     switch (action.type) {
       case FETCH_CHART_DATA_SUCCESS:
         const data = action.payload;
+
         const { dataTypeRequested } = action;
-        // const metaData = data["Meta Data"]
-        // const interval = metaData["4. Interval"];
-        const interval = chartDataTypes[dataTypeRequested].dataInterval;
-        // const latestDataDate = metaData["3. Last Refreshed"].split(" ")[0] // date in form of yyyy/mm/dd
+
+        const { dataKey } = chartDataTypes[dataTypeRequested];
+
         return formatData(
-          data[`Time Series (${interval})`],
+          data[dataKey],
           dataTypeRequested,
         );
       case CLEAR_CHART_DATA:
@@ -66,18 +70,6 @@ const chartData = () => {
         return state;
     }
   };
-
-  // const date = (state = "", action) => {
-  //   switch (action.type) {
-  //     case FETCH_CHART_DATA_SUCCESS:
-  //       return action.payload["Meta Data"]["3. Last Refreshed"].split(" ")[0];
-  //     case CLEAR_CHART_DATA:
-  //     case FETCH_CHART_DATA_FAILURE:
-  //       return null;
-  //     default:
-  //       return state;
-  //   }
-  // };
 
   const dataType = (state = "", action) => {
     switch (action.type) {
