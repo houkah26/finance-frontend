@@ -7,7 +7,7 @@ import { clearQuote } from "../../../actions/quote";
 
 import QuoteStockForm from "../../forms/QuoteStockForm";
 import BuyStockForm from "../../forms/BuyStockForm";
-import LineChartContainer from "../../chart";
+import ChartContainer from "../../chart";
 
 class BuyStock extends Component {
   componentDidMount() {
@@ -27,7 +27,7 @@ class BuyStock extends Component {
           </Grid.Column>
         </Grid>
         <br />
-        <LineChartContainer />
+        <ChartContainer />
       </div>
     );
   }
