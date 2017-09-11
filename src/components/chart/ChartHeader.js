@@ -8,23 +8,26 @@ const ChartHeader = ({
   quoteSymbol,
   dropdownOptions,
   chartDataType,
-  handleDropdownChange
+  handleDropdownChange,
+  shouldRenderDropdown
 }) => (
   <div className="header-container">
     <Header
     >{`${quoteName} (${quoteSymbol}), Current Price: $${quotePrice}`}</Header>
-    <Dropdown
-      inline
-      options={dropdownOptions}
-      defaultValue={chartDataType}
-      onChange={handleDropdownChange}
-    />
+    {shouldRenderDropdown && (
+      <Dropdown
+        inline
+        options={dropdownOptions}
+        defaultValue={chartDataType}
+        onChange={handleDropdownChange}
+      />
+    )}
   </div>
 );
 
 ChartHeader.propTypes = {
   quoteName: PropTypes.string.isRequired,
-  quotePrice: PropTypes.string.isRequired,
+  quotePrice: PropTypes.number.isRequired,
   quoteSymbol: PropTypes.string.isRequired,
   dropdownOptions: PropTypes.arrayOf(
     PropTypes.shape({
@@ -33,7 +36,8 @@ ChartHeader.propTypes = {
     }).isRequired
   ).isRequired,
   chartDataType: PropTypes.string.isRequired,
-  handleDropdownChange: PropTypes.func.isRequired
+  handleDropdownChange: PropTypes.func.isRequired,
+  shouldRenderDropdown: PropTypes.bool.isRequired
 };
 
 export default ChartHeader;
