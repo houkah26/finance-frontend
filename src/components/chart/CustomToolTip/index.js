@@ -16,8 +16,8 @@ const CustomTooltip = ({ active, payload }) => {
 };
 
 CustomTooltip.propTypes = {
-  active: PropTypes.bool.isRequired,
-  payload: PropTypes.array.isRequired,
+  active: PropTypes.bool,
+  payload: PropTypes.array,
   label: PropTypes.string,
   type: PropTypes.string
 };
