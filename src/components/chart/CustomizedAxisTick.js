@@ -17,10 +17,10 @@ const CustomizedAxisTick = ({ x, y, stroke, payload }) => (
 );
 
 CustomizedAxisTick.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-  stroke: PropTypes.number,
-  payload: PropTypes.object.isRequired
+  x: PropTypes.number,
+  y: PropTypes.number,
+  stroke: PropTypes.string,
+  payload: PropTypes.object
 };
 
 export default CustomizedAxisTick;
