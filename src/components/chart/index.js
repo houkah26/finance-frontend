@@ -23,8 +23,8 @@ import { fetchChartData } from "../../actions/chartData";
 
 import "./index.css";
 
-const LineChartContainer = ({
-  isFetching,
+const ChartContainer = ({
+  quoteIsFetching,
   chartDataErrorMessage,
   quoteName,
   quotePrice,
@@ -32,6 +32,7 @@ const LineChartContainer = ({
   quoteErrorMessage,
   chartData,
   chartDataType,
+  chartDataIsFetching,
   fetchChartData
 }) => {
   const displayError =
@@ -47,15 +48,10 @@ const LineChartContainer = ({
     fetchChartData(quoteSymbol, data.value);
   };
 
-  if (isFetching) {
-    return <Loading />;
-  }
-
   return (
     <div className="chart-container">
-      <Message error content={chartDataErrorMessage} hidden={!displayError} />
       {quoteName &&
-      !isFetching && (
+      !quoteIsFetching && (
         <ChartHeader
           quoteName={quoteName}
           quotePrice={quotePrice}
@@ -63,25 +59,32 @@ const LineChartContainer = ({
           dropdownOptions={dropdownOptions}
           chartDataType={chartDataType}
           handleDropdownChange={handleDropdownChange}
+          shouldRenderDropdown={chartData !== null && !chartDataIsFetching}
         />
       )}
-      {chartData && (
-        <div className="chart-wrapper">
-          <LineChart
-            data={chartData}
-            axisInterval={chartDataTypes[chartDataType].axisInterval}
-          />
-        </div>
+      <Message error content={chartDataErrorMessage} hidden={!displayError} />
+      {chartDataIsFetching ? (
+        <Loading />
+      ) : (
+        chartData && (
+          <div className="chart-wrapper">
+            <LineChart
+              data={chartData}
+              axisInterval={chartDataTypes[chartDataType].axisInterval}
+            />
+          </div>
+        )
       )}
     </div>
   );
 };
 
-LineChartContainer.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
+ChartContainer.propTypes = {
+  chartDataIsFetching: PropTypes.bool.isRequired,
+  quoteIsFetching: PropTypes.bool.isRequired,
   chartDataErrorMessage: PropTypes.string,
   quoteName: PropTypes.string,
-  quotePrice: PropTypes.string,
+  quotePrice: PropTypes.number,
   quoteSymbol: PropTypes.string,
   quoteErrorMessage: PropTypes.string,
   chartData: PropTypes.array,
@@ -92,12 +95,13 @@ LineChartContainer.propTypes = {
 const mapStateToProps = state => ({
   chartData: getChartDataData(state),
   chartDataType: getChartDataType(state),
-  isFetching: getIsChartDataFetching(state) || getIsQuoteFetching(state),
+  chartDataIsFetching: getIsChartDataFetching(state),
   chartDataErrorMessage: getChartDataErrorMessage(state),
+  quoteIsFetching: getIsQuoteFetching(state),
   quoteName: getQuoteName(state),
   quotePrice: getQuotePrice(state),
   quoteSymbol: getQuoteSymbol(state),
   quoteErrorMessage: getQuoteErrorMessage(state)
 });
 
-export default connect(mapStateToProps, { fetchChartData })(LineChartContainer);
+export default connect(mapStateToProps, { fetchChartData })(ChartContainer);
