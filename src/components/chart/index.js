@@ -44,6 +44,16 @@ const ChartContainer = ({
     value: type
   }));
 
+  const shouldChartRender = () => {
+    if (!chartData) {
+      return false;
+    }
+    if (chartData.length === 0) {
+      return false;
+    }
+    return true;
+  };
+
   const handleDropdownChange = (event, data) => {
     fetchChartData(quoteSymbol, data.value);
   };
@@ -66,7 +76,7 @@ const ChartContainer = ({
       {chartDataIsFetching ? (
         <Loading />
       ) : (
-        chartData && (
+        shouldChartRender() && (
           <div className="chart-wrapper">
             <LineChart
               data={chartData}
