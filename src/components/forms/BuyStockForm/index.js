@@ -51,7 +51,7 @@ const validate = (formProps, props) => {
 class BuyStockForm extends Component {
   static propTypes = {
     buyErrorMessage: PropTypes.string,
-    buyStock: PropTypes.string.isRequired
+    buyStock: PropTypes.func.isRequired
   };
 
   state = inititalState;
