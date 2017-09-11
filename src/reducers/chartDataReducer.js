@@ -10,7 +10,12 @@ import {
 import chartDataTypes from "../components/chart/chartDataTypes";
 
 const formatData = (data, dataTypeRequested) => {
-  const { axisTickFormat, minDataPoints, toolTipFormat, seriesType } = chartDataTypes[dataTypeRequested];
+  const {
+    axisTickFormat,
+    minDataPoints,
+    toolTipFormat,
+    seriesType
+  } = chartDataTypes[dataTypeRequested];
   //  Convert data object to an array of objects
   const dataArray = Object.keys(data).map(key => {
     const date = moment(key);
@@ -22,9 +27,9 @@ const formatData = (data, dataTypeRequested) => {
       value: parseFloat(data[key]["4. close"])
     };
   });
-  
+
   //  Start index of chartData
-  const startIndex = findStartIndex(seriesType, dataArray, minDataPoints)
+  const startIndex = findStartIndex(seriesType, dataArray, minDataPoints);
 
   return dataArray.slice(0, startIndex + 1).reverse();
 };
@@ -38,7 +43,7 @@ const findStartIndex = (seriesType, dataArray, minDataPoints) => {
     default:
       return dataArray.length - 1;
   }
-}
+};
 
 // Start index of data
 const findStartOfDayIndex = (dataArray, minDataPoints) => {
@@ -47,7 +52,7 @@ const findStartOfDayIndex = (dataArray, minDataPoints) => {
       return i;
     }
   }
-}
+};
 
 const chartData = () => {
   const data = (state = null, action) => {
@@ -59,12 +64,10 @@ const chartData = () => {
 
         const { dataKey } = chartDataTypes[dataTypeRequested];
 
-        return formatData(
-          data[dataKey],
-          dataTypeRequested,
-        );
+        return formatData(data[dataKey], dataTypeRequested);
       case CLEAR_CHART_DATA:
       case FETCH_CHART_DATA_FAILURE:
+      case FETCH_CHART_DATA_REQUEST:
         return null;
       default:
         return state;
@@ -77,6 +80,7 @@ const chartData = () => {
         return action.dataTypeRequested;
       case CLEAR_CHART_DATA:
       case FETCH_CHART_DATA_FAILURE:
+      case FETCH_CHART_DATA_REQUEST:
         return "";
       default:
         return state;
@@ -87,6 +91,7 @@ const chartData = () => {
     switch (action.type) {
       case FETCH_CHART_DATA_REQUEST:
         return true;
+      case CLEAR_CHART_DATA:
       case FETCH_CHART_DATA_SUCCESS:
       case FETCH_CHART_DATA_FAILURE:
         return false;
