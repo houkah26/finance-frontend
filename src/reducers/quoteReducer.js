@@ -21,6 +21,7 @@ const quote = () => {
         };
       case CLEAR_QUOTE:
       case FETCH_QUOTE_FAILURE:
+      case FETCH_QUOTE_REQUEST:
         return {};
       default:
         return state;
