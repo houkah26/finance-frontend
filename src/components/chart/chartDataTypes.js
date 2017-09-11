@@ -1,3 +1,5 @@
+const tradingHoursPerDay = 6.5;
+
 export default {
   day: {
     seriesType: "TIME_SERIES_INTRADAY",
@@ -16,7 +18,8 @@ export default {
     size: "compact",
     axisTickFormat: "MMM D",
     toolTipFormat: "ddd, MMM D h:mm A",
-    minDataPoints: (4*6.5*60) / 30, // min 4 days
+    // min 4 days at 14 data points per day
+    minDataPoints: 4 * (tradingHoursPerDay * (60 / 30) + 1),
     axisInterval: 13
   },
   month: {
@@ -36,7 +39,7 @@ export default {
     size: "full",
     axisTickFormat: "MMM YYYY",
     toolTipFormat: "MMM D, YYYY",
-    minDataPoints: 52*5-7,
+    minDataPoints: 52 * 5 - 7,
     axisInterval: 20
   },
   max: {
@@ -50,4 +53,3 @@ export default {
     axisInterval: 52
   }
 };
-
