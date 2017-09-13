@@ -21,14 +21,14 @@ const inputFields = [
 ];
 
 // Initial state
-const inititalState = {
+const initialState = {
   quoteSymbol: "",
   quotePrice: 0,
   numShares: 0,
   totalCost: 0,
   quoteErrorMessage: "",
   quoteIsLoading: false,
-  quoteIsSuccesfull: false,
+  quoteIsSuccessful: false,
   buyIsLoading: false
 };
 
@@ -54,10 +54,10 @@ class BuyStockForm extends Component {
     buyStock: PropTypes.func.isRequired
   };
 
-  state = inititalState;
+  state = initialState;
 
   handleFormSubmit = formProps => {
-    this.setState({ ...inititalState, quoteIsLoading: true });
+    this.setState({ ...initialState, quoteIsLoading: true });
     this.fetchQuote(formProps.stockSymbol, formProps.numberOfShares);
   };
 
@@ -70,17 +70,17 @@ class BuyStockForm extends Component {
         const { data } = response;
 
         this.setState({
-          ...inititalState,
+          ...initialState,
           quoteSymbol: data.stockSymbol,
           quotePrice: round(data.price, 2).toFixed(2),
           numShares: numberOfShares,
           totalCost: round(data.price * numberOfShares, 2),
-          quoteIsSuccesfull: true
+          quoteIsSuccessful: true
         });
       })
       .catch(error => {
         this.setState({
-          ...inititalState,
+          ...initialState,
           quoteErrorMessage: error.response.data.message
         });
       });
@@ -103,7 +103,7 @@ class BuyStockForm extends Component {
       totalCost,
       quoteErrorMessage,
       quoteIsLoading,
-      quoteIsSuccesfull,
+      quoteIsSuccessful,
       buyIsLoading
     } = this.state;
 
@@ -116,22 +116,22 @@ class BuyStockForm extends Component {
       <div className="buy-stock-form">
         <Header size="medium">Buy Stock:</Header>
         <Form
-          error={quoteContainsError}
-          success={quoteIsSuccesfull}
+          success={quoteIsSuccessful}
           onSubmit={handleSubmit(this.handleFormSubmit)}
         >
           <Form.Group widths="equal">{renderFields(inputFields)}</Form.Group>
           <Form.Button loading={quoteIsLoading}>
             Calculate Transaction Cost
           </Form.Button>
-          <Message error content={quoteErrorMessage} />
         </Form>
         {quoteContainsError && <Message error content={quoteErrorMessage} />}
-          <span
-          >{`${numShares} shares of ${quoteSymbol} costs $${totalCost.toFixed(
-            2
-          )}`}</span>
-          {quoteIsSuccesfull && (
+        {quoteIsSuccessful && (
+          <Message className="success-message" success>
+            <span
+            >{`${numShares} shares of ${quoteSymbol} costs $${totalCost.toFixed(
+              2
+            )}`}</span>
+
             <Button
               size="mini"
               positive
@@ -142,8 +142,7 @@ class BuyStockForm extends Component {
             >
               Purchase
             </Button>
-          )}
-        </Message>
+          </Message>
         )}
         {buyContainsError && <Message error>{buyErrorMessage}</Message>}
       </div>
