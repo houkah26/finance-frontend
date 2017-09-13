@@ -72,7 +72,10 @@ const ChartContainer = ({
           shouldRenderDropdown={chartData !== null && !chartDataIsFetching}
         />
       )}
-      <Message error content={chartDataErrorMessage} hidden={!displayError} />
+      <Message error hidden={!displayError}>
+        Network error retrieving stock chart data from external API. Please wait
+        and try again.
+      </Message>
       {chartDataIsFetching ? (
         <Loading />
       ) : (
