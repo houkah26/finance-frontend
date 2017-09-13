@@ -1,8 +1,10 @@
 # Finance App Front-End
 
-User interface to consume [backend API](https://github.com/houkah26/finance-backend) for buying and selling stock.
+Stock trading simulator where authenticated users can quote, buy, and stock based on real time stock data.
 
 [Link to Finance App hosted on heroku](https://finance-frontend.herokuapp.com/)
+
+[back-end code](https://github.com/houkah26/finance-backend) 
 
 ## Features
 * User Authentication utilizing JSON Web Tokens
@@ -10,6 +12,7 @@ User interface to consume [backend API](https://github.com/houkah26/finance-back
 * Buy/Sell stocks
 * View sortable stock portfolio and transaction history
 * Add funds/cash
+* Time series stock charts via Alpha Vantage API
 * User info page which also shows trading performance (net gain)
 
 ## Technologies
@@ -22,11 +25,8 @@ User interface to consume [backend API](https://github.com/houkah26/finance-back
 * Bootstrapped with Create-React-App
 
 ## TO-DO
-* Add Prop-Types (In progress)
+* Add prop types (In progress)
 * Pagination for history
 * Filter table for portfolio/history
-* Graphs for stock information
-* Improve error handeling
-* Seperate API file/folder
-* List component
+* Improve error handling
 
