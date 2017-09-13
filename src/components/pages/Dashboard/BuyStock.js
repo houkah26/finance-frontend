@@ -21,19 +21,29 @@ class BuyStock extends Component {
     this.props.clearChartData();
   }
 
+  scrollToChart = () => {
+    this.chart.scrollIntoView({ behavior: "smooth", block: "end" });
+  };
+
   render() {
     return (
       <div>
         <Grid className="buy-stock-container" stackable columns={2} divided>
           <Grid.Column>
-            <QuoteStockForm />
+            <QuoteStockForm scrollToChart={this.scrollToChart} />
           </Grid.Column>
           <Grid.Column>
             <BuyStockForm />
           </Grid.Column>
         </Grid>
         <br />
-        <ChartContainer />
+        <div
+          ref={chart => {
+            this.chart = chart;
+          }}
+        >
+          <ChartContainer />
+        </div>
       </div>
     );
   }

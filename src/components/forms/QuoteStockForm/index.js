@@ -26,7 +26,7 @@ const validate = (formProps, props) => {
 class QuoteStockForm extends Component {
   handleFormSubmit = ({ stockSymbol }) => {
     const symbol = stockSymbol.toUpperCase();
-
+    this.props.scrollToChart();
     this.props.fetchQuote(symbol);
     this.props.fetchChartData(symbol, "day");
   };
