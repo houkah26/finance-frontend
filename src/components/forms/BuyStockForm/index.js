@@ -12,7 +12,7 @@ import { buyStock } from "../../../actions/auth/user";
 import { API_URL } from "../../../constants";
 import renderFields from "../components/renderFields";
 
-import "./BuyStockForm.css";
+import "./index.css";
 
 // Input fields to render
 const inputFields = [
