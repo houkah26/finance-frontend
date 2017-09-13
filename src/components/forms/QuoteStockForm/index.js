@@ -44,14 +44,11 @@ class QuoteStockForm extends Component {
     return (
       <div>
         <Header size="medium">Get current stock price and info:</Header>
-        <Form
-          error={containsError}
-          onSubmit={handleSubmit(this.handleFormSubmit)}
-        >
+        <Form onSubmit={handleSubmit(this.handleFormSubmit)}>
           {renderFields(inputFields)}
           <Form.Button loading={isFetching}>Get Quote</Form.Button>
-          <Message error content={quoteErrorMessage} />
         </Form>
+        {containsError && <Message error content={quoteErrorMessage} />}
       </div>
     );
   }

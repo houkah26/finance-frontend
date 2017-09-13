@@ -126,11 +126,7 @@ class BuyStockForm extends Component {
           </Form.Button>
           <Message error content={quoteErrorMessage} />
         </Form>
-        <Message
-          className="success-message"
-          success
-          hidden={!quoteIsSuccesfull}
-        >
+        {quoteContainsError && <Message error content={quoteErrorMessage} />}
           <span
           >{`${numShares} shares of ${quoteSymbol} costs $${totalCost.toFixed(
             2
@@ -148,10 +144,8 @@ class BuyStockForm extends Component {
             </Button>
           )}
         </Message>
-        <br />
-        <Message error hidden={!buyContainsError}>
-          {buyErrorMessage}
-        </Message>
+        )}
+        {buyContainsError && <Message error>{buyErrorMessage}</Message>}
       </div>
     );
   }
