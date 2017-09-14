@@ -73,10 +73,12 @@ const ChartContainer = ({
         />
       )}
       <Message error hidden={!displayError}>
-        Network error retrieving stock chart data. It seems as though the free
-        API that was being used to get time series data is not working (you get
-        what you pay for). Currently working on switching to a more reliable
-        source.
+        Network error retrieving stock chart data.{" "}
+        <p>
+          It seems as though the free API that was being used to get time series
+          data is not working (you get what you pay for). Currently working on
+          switching to a more reliable source.
+        </p>
       </Message>
       {chartDataIsFetching ? (
         <Loading />
