@@ -45,12 +45,12 @@ class History extends Component {
 }
 
 const mapStateToProps = state => {
-  const listType = "history";
+  const dataType = "history";
 
   return {
-    history: getStockList(state, listType),
-    isStockFetching: getIsStockFetching(state, listType),
-    errorMessage: getStockErrorMessage(state, listType)
+    history: getStockList(state, dataType),
+    isStockFetching: getIsStockFetching(state, dataType),
+    errorMessage: getStockErrorMessage(state, dataType)
   };
 };
 

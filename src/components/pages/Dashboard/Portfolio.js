@@ -49,13 +49,13 @@ class Portfolio extends Component {
 }
 
 const mapStateToProps = state => {
-  const listType = "portfolio";
+  const dataType = "portfolio";
 
   return {
-    portfolio: getStockList(state, listType),
-    totalValue: getStockTotalValue(state, listType),
-    isStockFetching: getIsStockFetching(state, listType),
-    errorMessage: getStockErrorMessage(state, listType)
+    portfolio: getStockList(state, dataType),
+    totalValue: getStockTotalValue(state, dataType),
+    isStockFetching: getIsStockFetching(state, dataType),
+    errorMessage: getStockErrorMessage(state, dataType)
   };
 };
 

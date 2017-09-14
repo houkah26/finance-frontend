@@ -31,12 +31,12 @@ class SellStock extends Component {
 }
 
 const mapStateToProps = state => {
-  const listType = "portfolio";
+  const dataType = "portfolio";
 
   return {
-    portfolio: getStockList(state, listType),
-    isStockFetching: getIsStockFetching(state, listType),
-    errorMessage: getStockErrorMessage(state, listType)
+    portfolio: getStockList(state, dataType),
+    isStockFetching: getIsStockFetching(state, dataType),
+    errorMessage: getStockErrorMessage(state, dataType)
   };
 };
 

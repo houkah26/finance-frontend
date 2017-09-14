@@ -48,13 +48,13 @@ export const calcTotalValue = portfolio => {
   return round(total, 2);
 };
 
-const stock = listType => {
+const stock = dataType => {
   const list = (state = [], action) => {
-    if (action.type !== FETCH_STOCK_SUCCESS || listType !== action.listType) {
+    if (action.type !== FETCH_STOCK_SUCCESS || dataType !== action.dataType) {
       return state;
     }
 
-    switch (listType) {
+    switch (dataType) {
       case "portfolio":
         return mapPortfolio(action.payload);
       case "history":
@@ -66,13 +66,13 @@ const stock = listType => {
 
   // Store total value, portfolio only
   const totalValue = (state = null, action) => {
-    return action.type === FETCH_STOCK_SUCCESS && action.listType === listType
+    return action.type === FETCH_STOCK_SUCCESS && action.dataType === dataType
       ? calcTotalValue(action.payload)
       : state;
   };
 
   const isFetching = (state = false, action) => {
-    if (action.listType !== listType) {
+    if (action.dataType !== dataType) {
       return state;
     }
 
@@ -88,7 +88,7 @@ const stock = listType => {
   };
 
   const errorMessage = (state = "", action) => {
-    if (action.listType !== listType) {
+    if (action.dataType !== dataType) {
       return state;
     }
 

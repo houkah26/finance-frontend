@@ -46,13 +46,13 @@ class UserInfoContainer extends Component {
 }
 
 const mapStateToProps = state => {
-  const listType = "portfolio";
+  const dataType = "portfolio";
 
   return {
     user: state.auth.user,
-    totalValue: getStockTotalValue(state, listType),
-    isStockFetching: getIsStockFetching(state, listType),
-    errorMessage: getStockErrorMessage(state, listType)
+    totalValue: getStockTotalValue(state, dataType),
+    isStockFetching: getIsStockFetching(state, dataType),
+    errorMessage: getStockErrorMessage(state, dataType)
   };
 };
 

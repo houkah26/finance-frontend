@@ -13,25 +13,25 @@ import { getIsStockFetching } from "../../reducers/index";
 //= =====================
 // Stock Action Creators
 //= =====================
-export const fetchStock = listType => (dispatch, getState) => {
-  if (getIsStockFetching(getState(), listType)) {
+export const fetchStock = dataType => (dispatch, getState) => {
+  if (getIsStockFetching(getState(), dataType)) {
     return;
   }
 
   dispatch({
     type: FETCH_STOCK_REQUEST,
-    listType // history or portfolio
+    dataType // history or portfolio
   });
 
   axios
-    .get(`${API_URL}/user/${listType}`, {
+    .get(`${API_URL}/user/${dataType}`, {
       headers: { Authorization: cookie.load("token") }
     })
     .then(response => {
       dispatch({
         type: FETCH_STOCK_SUCCESS,
-        payload: response.data[listType],
-        listType
+        payload: response.data[dataType],
+        dataType
       });
     })
     .catch(error => {
