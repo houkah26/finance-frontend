@@ -22,7 +22,7 @@ export const loginUser = ({ username, password }) => dispatch => {
       loginHandler(dispatch, response.data.token, response.data.user);
     })
     .catch(error => {
-      errorHandler(dispatch, error.response, AUTH_ERROR);
+      errorHandler(dispatch, error, AUTH_ERROR);
     });
 };
 
@@ -47,7 +47,7 @@ export const registerUser = ({
       loginHandler(dispatch, response.data.token, response.data.user);
     })
     .catch(error => {
-      errorHandler(dispatch, error.response, AUTH_ERROR);
+      errorHandler(dispatch, error, AUTH_ERROR);
     });
 };
 
@@ -85,6 +85,6 @@ export const fetchUser = token => dispatch => {
       cookie.remove("token", { path: "/" });
       dispatch(push("/login"));
 
-      errorHandler(dispatch, error.response, AUTH_ERROR);
+      errorHandler(dispatch, error, AUTH_ERROR);
     });
 };

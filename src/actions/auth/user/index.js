@@ -24,7 +24,7 @@ export const addFunds = fundAmount => dispatch => {
     .catch(error => {
       console.log("Add fund action:", error.response);
 
-      errorHandler(dispatch, error.response, AUTH_ERROR);
+      errorHandler(dispatch, error, AUTH_ERROR);
     });
 };
 
@@ -53,9 +53,7 @@ export const buyStock = (stockSymbol, shares) => dispatch => {
       dispatch(push("/dashboard/portfolio"));
     })
     .catch(error => {
-      console.log("Buy stock action:", error.response);
-
-      errorHandler(dispatch, error.response, AUTH_ERROR);
+      errorHandler(dispatch, error, AUTH_ERROR);
     });
 };
 
@@ -80,8 +78,6 @@ export const sellStock = (stockSymbol, shares) => dispatch => {
       dispatch(push("/dashboard/portfolio"));
     })
     .catch(error => {
-      console.log("Sell stock action:", error.response);
-
-      errorHandler(dispatch, error.response, AUTH_ERROR);
+      errorHandler(dispatch, error, AUTH_ERROR);
     });
 };

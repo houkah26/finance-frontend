@@ -40,9 +40,7 @@ export const fetchChartData = (stockSymbol, dataTypeRequested) => (
       });
     })
     .catch(error => {
-      console.log("Chart Data:", error);
-
-      errorHandler(dispatch, error.response, FETCH_CHART_DATA_FAILURE);
+      errorHandler(dispatch, error, FETCH_CHART_DATA_FAILURE, dataType);
     });
 };
 

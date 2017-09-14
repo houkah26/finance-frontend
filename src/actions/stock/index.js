@@ -35,8 +35,6 @@ export const fetchStock = dataType => (dispatch, getState) => {
       });
     })
     .catch(error => {
-      console.log("fetch stock:", error);
-
-      errorHandler(dispatch, error.response, FETCH_STOCK_FAILURE);
+      errorHandler(dispatch, error, FETCH_STOCK_FAILURE, dataType);
     });
 };

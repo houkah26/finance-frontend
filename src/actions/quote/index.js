@@ -34,9 +34,7 @@ export const fetchQuote = stockSymbol => (dispatch, getState) => {
       });
     })
     .catch(error => {
-      console.log("quote stock:", error);
-
-      errorHandler(dispatch, error.response, FETCH_QUOTE_FAILURE);
+      errorHandler(dispatch, error, FETCH_QUOTE_FAILURE);
     });
 };
 
