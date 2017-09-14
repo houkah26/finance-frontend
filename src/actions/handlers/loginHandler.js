@@ -4,7 +4,7 @@ import { push } from "react-router-redux";
 import { AUTH_USER } from "../types";
 
 // Login handler for setting token, user info, and auth status on
-// succesfull authentication
+// successful authentication
 const loginHandler = (dispatch, token, user) => {
   // set web token
   cookie.save("token", token, { path: "/" });
