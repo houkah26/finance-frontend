@@ -6,37 +6,39 @@ import {
   FETCH_CHART_DATA_FAILURE,
   CLEAR_CHART_DATA
 } from "../types.js";
-import chartDataTypes from "../../components/chart/chartDataTypes";
-import { AV_API_URL, AV_API_KEY } from "../../constants";
+
+import { TRADIER_API_KEY } from "../../constants";
+import { chartRequestUrl, extractChartDataFromResponse } from "./chartDataAPI";
 import errorHandler from "../handlers/errorHandler";
 import { getIsChartDataFetching } from "../../reducers/index";
 
 //= =====================
 // ChartData Action Creators
 //= =====================
-export const fetchChartData = (stockSymbol, dataTypeRequested) => (
+export const fetchChartData = (stockSymbol, dataType) => (
   dispatch,
   getState
 ) => {
-  if (getIsChartDataFetching(getState())) {
+  if (getIsChartDataFetching(getState(), dataType)) {
     return;
   }
 
   dispatch({
-    type: FETCH_CHART_DATA_REQUEST
+    type: FETCH_CHART_DATA_REQUEST,
+    dataType
   });
 
-  const { seriesType, dataInterval, size } = chartDataTypes[dataTypeRequested];
+  const headers = {
+    headers: { Authorization: TRADIER_API_KEY, Accept: "application/json" }
+  };
 
   axios
-    .get(
-      `${AV_API_URL}function=${seriesType}&symbol=${stockSymbol}&interval=${dataInterval}&outputsize=${size}&apikey=${AV_API_KEY}`
-    )
+    .get(chartRequestUrl(stockSymbol, dataType), headers)
     .then(response => {
       dispatch({
         type: FETCH_CHART_DATA_SUCCESS,
-        payload: response.data,
-        dataTypeRequested
+        payload: extractChartDataFromResponse(response, dataType),
+        dataType
       });
     })
     .catch(error => {

@@ -6,7 +6,6 @@ import { Form, Message, Header } from "semantic-ui-react";
 import { fetchQuote } from "../../../actions/quote";
 import { fetchChartData } from "../../../actions/chartData";
 import { getIsQuoteFetching, getQuoteErrorMessage } from "../../../reducers";
-import { getIsChartDataFetching } from "../../../reducers";
 import renderFields from "../components/renderFields";
 
 // Input fields to render
@@ -28,25 +27,20 @@ class QuoteStockForm extends Component {
     const symbol = stockSymbol.toUpperCase();
     this.props.scrollToChart();
     this.props.fetchQuote(symbol);
-    this.props.fetchChartData(symbol, "month");
+    this.props.fetchChartData(symbol, "intraDay");
+    this.props.fetchChartData(symbol, "daily");
   };
 
   render() {
-    const {
-      quoteErrorMessage,
-      quoteIsFetching,
-      chartDataIsFetching,
-      handleSubmit
-    } = this.props;
+    const { quoteErrorMessage, quoteIsFetching, handleSubmit } = this.props;
     const containsError = quoteErrorMessage.length > 0;
-    const isFetching = quoteIsFetching || chartDataIsFetching;
 
     return (
       <div>
         <Header size="medium">Get current stock price and info:</Header>
         <Form onSubmit={handleSubmit(this.handleFormSubmit)}>
           {renderFields(inputFields)}
-          <Form.Button loading={isFetching}>Get Quote</Form.Button>
+          <Form.Button loading={quoteIsFetching}>Get Quote</Form.Button>
         </Form>
         {containsError && <Message error content={quoteErrorMessage} />}
       </div>
@@ -56,8 +50,7 @@ class QuoteStockForm extends Component {
 
 const mapStateToProps = state => ({
   quoteErrorMessage: getQuoteErrorMessage(state),
-  quoteIsFetching: getIsQuoteFetching(state),
-  chartDataIsFetching: getIsChartDataFetching(state)
+  quoteIsFetching: getIsQuoteFetching(state)
 });
 
 const createForm = reduxForm({

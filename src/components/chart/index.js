@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Message } from "semantic-ui-react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -7,7 +7,8 @@ import LineChart from "./LineChart";
 import Loading from "../loading";
 import ChartHeader from "./ChartHeader";
 
-import chartDataTypes from "./chartDataTypes";
+import chartDisplayTypes from "./chartDisplayTypes";
+import formatChartDataByDisplayType from "./formatChartDataByDisplayType";
 import {
   getQuoteName,
   getQuoteSymbol,
@@ -16,104 +17,126 @@ import {
   getIsChartDataFetching,
   getIsQuoteFetching,
   getChartDataErrorMessage,
-  getChartDataData,
-  getChartDataType
+  getChartDataData
 } from "../../reducers";
-import { fetchChartData } from "../../actions/chartData";
 
 import "./index.css";
 
-const ChartContainer = ({
-  quoteIsFetching,
-  chartDataErrorMessage,
-  quoteName,
-  quotePrice,
-  quoteSymbol,
-  quoteErrorMessage,
-  chartData,
-  chartDataType,
-  chartDataIsFetching,
-  fetchChartData
-}) => {
-  const displayError =
-    chartDataErrorMessage.length > 0 &&
-    quoteErrorMessage !== "Invalid stock symbol";
+const dropdownOptions = Object.keys(chartDisplayTypes).map(type => ({
+  text: type,
+  value: type
+}));
 
-  const dropdownOptions = Object.keys(chartDataTypes).map(type => ({
-    text: type,
-    value: type
-  }));
-
-  const shouldChartRender = () => {
-    if (!chartData) {
-      return false;
-    }
-    if (chartData.length === 0) {
-      return false;
-    }
-    return true;
+class ChartContainer extends Component {
+  state = {
+    selectedChartDisplayType: "day"
   };
 
-  const handleDropdownChange = (event, data) => {
-    fetchChartData(quoteSymbol, data.value);
+  handleDropdownChange = (event, data) => {
+    this.setState({ selectedChartDisplayType: data.value });
   };
 
-  return (
-    <div className="chart-container">
-      {quoteName &&
-      !quoteIsFetching && (
-        <ChartHeader
-          quoteName={quoteName}
-          quotePrice={quotePrice}
-          quoteSymbol={quoteSymbol}
-          dropdownOptions={dropdownOptions}
-          chartDataType={chartDataType}
-          handleDropdownChange={handleDropdownChange}
-          shouldRenderDropdown={chartData !== null && !chartDataIsFetching}
-        />
-      )}
-      <Message error hidden={!displayError}>
-        Network error retrieving stock chart data.{" "}
-        <p>
-          It seems as though the free API that was being used to get time series
-          data is not working (you get what you pay for). Currently working on
-          switching to a more reliable source.
-        </p>
-      </Message>
-      {chartDataIsFetching ? (
-        <Loading />
-      ) : (
-        shouldChartRender() && (
-          <div className="chart-wrapper">
+  render() {
+    const {
+      quoteIsFetching,
+      quoteName,
+      quotePrice,
+      quoteSymbol,
+      quoteErrorMessage
+    } = this.props;
+
+    const { selectedChartDisplayType } = this.state;
+
+    const selectedChartDataType =
+      chartDisplayTypes[selectedChartDisplayType].dataType;
+
+    const chartData = this.props.chartData[selectedChartDataType];
+    const chartDataErrorMessage = this.props.chartDataErrorMessage[
+      selectedChartDataType
+    ];
+    const chartDataIsFetching = this.props.chartDataIsFetching[
+      selectedChartDataType
+    ];
+
+    const displayError =
+      chartDataErrorMessage.length > 0 &&
+      quoteErrorMessage !== "Invalid stock symbol";
+
+    if (chartData.length > 0) {
+      console.log("data before", chartData);
+      console.log(
+        formatChartDataByDisplayType(chartData, selectedChartDisplayType)
+      );
+    }
+
+    return (
+      <div className="chart-container">
+        {quoteName &&
+        !quoteIsFetching && (
+          <ChartHeader
+            quoteName={quoteName}
+            quotePrice={quotePrice}
+            quoteSymbol={quoteSymbol}
+            dropdownOptions={dropdownOptions}
+            selectedChartDisplayType={selectedChartDisplayType}
+            handleDropdownChange={this.handleDropdownChange}
+            shouldRenderDropdown={chartData !== null && !chartDataIsFetching}
+          />
+        )}
+        <Message error hidden={!displayError} content={chartDataErrorMessage} />
+        {chartDataIsFetching ? (
+          <Loading />
+        ) : (
+          chartData.length > 0 && (
             <LineChart
-              data={chartData}
-              axisInterval={chartDataTypes[chartDataType].axisInterval}
+              data={formatChartDataByDisplayType(
+                chartData,
+                selectedChartDisplayType
+              )}
+              axisInterval={
+                chartDisplayTypes[selectedChartDisplayType].axisInterval
+              }
             />
-          </div>
-        )
-      )}
-    </div>
-  );
-};
+          )
+        )}
+      </div>
+    );
+  }
+}
 
 ChartContainer.propTypes = {
-  chartDataIsFetching: PropTypes.bool.isRequired,
+  chartData: PropTypes.shape({
+    intraDay: PropTypes.array,
+    daily: PropTypes.array
+  }).isRequired,
+  chartDataIsFetching: PropTypes.shape({
+    intraDay: PropTypes.bool.isRequired,
+    daily: PropTypes.bool.isRequired
+  }).isRequired,
+  chartDataErrorMessage: PropTypes.shape({
+    intraDay: PropTypes.string,
+    daily: PropTypes.string
+  }).isRequired,
   quoteIsFetching: PropTypes.bool.isRequired,
-  chartDataErrorMessage: PropTypes.string,
   quoteName: PropTypes.string,
   quotePrice: PropTypes.number,
   quoteSymbol: PropTypes.string,
-  quoteErrorMessage: PropTypes.string,
-  chartData: PropTypes.array,
-  chartDataType: PropTypes.string,
-  fetchChartData: PropTypes.func.isRequired
+  quoteErrorMessage: PropTypes.string
 };
 
 const mapStateToProps = state => ({
-  chartData: getChartDataData(state),
-  chartDataType: getChartDataType(state),
-  chartDataIsFetching: getIsChartDataFetching(state),
-  chartDataErrorMessage: getChartDataErrorMessage(state),
+  chartData: {
+    intraDay: getChartDataData(state, "intraDay"),
+    daily: getChartDataData(state, "daily")
+  },
+  chartDataIsFetching: {
+    intraDay: getIsChartDataFetching(state, "intraDay"),
+    daily: getIsChartDataFetching(state, "daily")
+  },
+  chartDataErrorMessage: {
+    intraDay: getChartDataErrorMessage(state, "intraDay"),
+    daily: getChartDataErrorMessage(state, "daily")
+  },
   quoteIsFetching: getIsQuoteFetching(state),
   quoteName: getQuoteName(state),
   quotePrice: getQuotePrice(state),
@@ -121,4 +144,4 @@ const mapStateToProps = state => ({
   quoteErrorMessage: getQuoteErrorMessage(state)
 });
 
-export default connect(mapStateToProps, { fetchChartData })(ChartContainer);
+export default connect(mapStateToProps)(ChartContainer);

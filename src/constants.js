@@ -6,9 +6,9 @@
 // Back-end API URL
 export const API_URL = "https://finance-backend.herokuapp.com/api";
 
-// Alpha-Vantage API URL and Key
-export const AV_API_URL = "https://www.alphavantage.co/query?";
-export const AV_API_KEY = "A6U827PR1WBNS4T1";
+// Tradier API URL and Key
+export const TRADIER_API_URL = "https://sandbox.tradier.com";
+export const TRADIER_API_KEY = "Bearer 2ZZ2CFrXTmRuIuHX2XFyw1GLA3zc";
 
 // Responsive limit for react media queries (px)
 export const RESPONSIVE_LIMIT = 767;

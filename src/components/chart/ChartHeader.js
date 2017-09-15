@@ -7,7 +7,7 @@ const ChartHeader = ({
   quotePrice,
   quoteSymbol,
   dropdownOptions,
-  chartDataType,
+  selectedChartDisplayType,
   handleDropdownChange,
   shouldRenderDropdown
 }) => (
@@ -18,7 +18,7 @@ const ChartHeader = ({
       <Dropdown
         inline
         options={dropdownOptions}
-        defaultValue={chartDataType}
+        defaultValue={selectedChartDisplayType}
         onChange={handleDropdownChange}
       />
     )}
@@ -35,7 +35,7 @@ ChartHeader.propTypes = {
       value: PropTypes.string.isRequired
     }).isRequired
   ).isRequired,
-  chartDataType: PropTypes.string.isRequired,
+  selectedChartDisplayType: PropTypes.string.isRequired,
   handleDropdownChange: PropTypes.func.isRequired,
   shouldRenderDropdown: PropTypes.bool.isRequired
 };
