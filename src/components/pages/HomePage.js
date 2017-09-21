@@ -26,11 +26,6 @@ const HomePage = ({ authenticated, changeRoute }) => (
       become more familiar with the modern React front-end ecosystem. See footer
       below for links to source code.
     </p>
-    <p>
-      Please pardon the initial load time, the back-end server hosted for free
-      on Heroku has to be woken up after an extended period without receiving
-      traffic.
-    </p>
     <div>
       <Header size="medium">Features</Header>
       <ul style={ulStyle}>
