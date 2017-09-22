@@ -1,6 +1,8 @@
 {
-  "short_name": "Finance App",
-  "name": "Finance App Built With Mongo, Node, Express, and React",
+  "short_name": "React Finance",
+  "name": "React Finance",
+  "description":
+    "Stock Trading Simulator Built With \n Mongo, Node, Express, and React",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,8 +10,8 @@
       "type": "image/png"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "./",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#d4d4d4",
+  "background_color": "#1b1c1d"
 }
