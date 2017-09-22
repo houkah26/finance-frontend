@@ -26,7 +26,7 @@ class UserInfoContainer extends Component {
     const joinedDate = moment(joined).format("MMMM Do, YYYY");
 
     return (
-      <Grid stackable columns={2} divided>
+      <Grid stackable columns={2} divided className="user-info-container">
         <UserInfo
           username={username}
           firstName={firstName}

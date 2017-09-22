@@ -14,25 +14,33 @@
     overflow-y: auto;
 
     .layout-main-content {
-      max-width: rem-calc(1000px);
+      max-width: 1000px;
       width: 100%;
       margin: 0 auto;
       padding: 0.75rem;
       overflow-y: auto;
-      min-height: calc(100vh - #{$headerHeight} - #{$footerHeight});
+      min-height: calc(100vh - #{$headerHeight});
+
+      @media (min-width: $responsive_breakpoint) {
+        min-height: calc(100vh - #{$headerHeight} - #{$footerHeight});
+      }
     }
 
     .layout-footer {
-      height: #{$footerHeight};
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      flex-wrap: wrap;
-      padding: 0 0.5rem;
+      display: none;
 
-      span {
-        font-size: 1.1rem;
-        font-weight: bold;
+      @media (min-width: $responsive_breakpoint) {
+        height: #{$footerHeight};
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0 0.5rem;
+
+        span {
+          font-size: 1.1rem;
+          font-weight: bold;
+        }
       }
     }
   }

@@ -8,13 +8,25 @@
   }
 
   .dashboard-content-container {
-    padding-top: 1em !important;
-    padding-bottom: 0em !important;
+    padding: 0.2rem !important;
+    max-height: calc(100vh - 8.5rem);
+    overflow-y: auto;
+    border: 1px solid rgba(0, 0, 0, 0);
 
     @media (min-width: $responsive_breakpoint) {
       // Scroll dashboard content
-      max-height: calc(100vh - 11rem);
+      max-height: calc(100vh - 11.1rem);
       overflow-y: auto;
+    }
+
+    // Remove negative margins from semantic ui grid
+    .ui.grid {
+      margin: 0;
+    }
+    // Reduce top and bottom padding from semantic ui grid columns
+    .column {
+      padding-top: 1rem !important !important;
+      padding-bottom: 1rem !important !important;
     }
 
     .buy-stock-container {
@@ -23,7 +35,11 @@
 
     .sell-stock-container {
       // To account for height after stock is selected
-      height: 18rem;
+      min-height: 18rem;
+    }
+
+    .add-funds-container {
+      padding-top: 0.5rem;
     }
   }
 }

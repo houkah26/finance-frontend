@@ -7,9 +7,10 @@ const divStyles = {
   margin: "0 auto"
 };
 
-const AddFunds = () =>
-  <div style={divStyles}>
+const AddFunds = () => (
+  <div style={divStyles} className="add-funds-container">
     <AddFundForm />
-  </div>;
+  </div>
+);
 
 export default AddFunds;

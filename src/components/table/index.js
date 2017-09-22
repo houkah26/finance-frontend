@@ -7,7 +7,7 @@ import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import TableFooter from "./TableFooter";
 
-import './index.css'
+import "./index.css";
 
 const sortData = (sortColumn, reverse, altSortKey, data) => {
   if (!sortColumn) {
