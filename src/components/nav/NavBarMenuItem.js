@@ -11,7 +11,7 @@ const NavMenuItem = ({
   position = null,
   header = false,
   collapsed = false
-}) =>
+}) => (
   <Menu.Item
     name={route}
     active={active}
@@ -21,10 +21,8 @@ const NavMenuItem = ({
   >
     {icon && <Icon name={icon.name} size={icon.size} />}
     {content}
-    {active &&
-      collapsed &&
-      <Icon name="content" size="large" className="nav-toggle" />}
-  </Menu.Item>;
+  </Menu.Item>
+);
 
 NavMenuItem.propTypes = {
   content: PropTypes.string,

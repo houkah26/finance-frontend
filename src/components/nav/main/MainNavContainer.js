@@ -6,6 +6,7 @@ import { logoutUser } from "../../../actions/auth";
 import { changeRoute } from "../../../actions/routing";
 
 import NavBar from "../NavBar";
+import NavBarToggle from "../NavBarToggle";
 
 const extractRootPath = currentPath => {
   // check for presence of route (second slash: ie /dashboard/something)
@@ -28,9 +29,39 @@ class NavMenu extends Component {
     className: PropTypes.string
   };
 
+  constructor(props) {
+    super(props);
+
+    this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+
   state = {
     collapsed: true
   };
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  // Set the wrapper ref
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
+
+  // Triggered when clicked outside of component
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      // Toggle collapsed state if not collapsed
+      if (!this.state.collapsed) {
+        this.toggleCollapse();
+      }
+    }
+  }
 
   navToRoute = name => {
     const route = `/${name}`;
@@ -117,15 +148,21 @@ class NavMenu extends Component {
     );
 
     return (
-      <NavBar
-        itemsToRender={itemsToRender}
-        activeItem={activeItem}
-        className={className}
-        collapsed={collapsed}
-        stackable
-        inverted
-        size="huge"
-      />
+      <div ref={this.setWrapperRef}>
+        <NavBar
+          itemsToRender={itemsToRender}
+          activeItem={activeItem}
+          className={className}
+          collapsed={collapsed}
+          stackable
+          inverted
+          size="huge"
+        />
+        <NavBarToggle
+          collapsed={collapsed}
+          toggleCollapse={this.toggleCollapse}
+        />
+      </div>
     );
   }
 }

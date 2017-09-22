@@ -14,17 +14,24 @@
     }
   }
 
-  > .item {
-    &.active {
-      display: flex !important;
+  // Make item black when collapsed at mobile resolutions
+  @media (max-width: $responsive_breakpoint) {
+    &.collapse > .item {
+      background: rgb(27, 28, 29) !important;
     }
+  }
+}
 
-    > .nav-toggle {
-      flex-grow: 1 !important;
-      text-align: right;
-      @media (min-width: $responsive_breakpoint) {
-        display: none;
-      }
-    }
+.nav-toggle {
+  position: fixed !important;
+  right: 0.4rem;
+  top: 0.4rem;
+  z-index: 9999;
+  color: #fff;
+  margin: 0.5em !important;
+
+  // No nav toggle for large format
+  @media (min-width: $responsive_breakpoint) {
+    display: none !important;
   }
 }
