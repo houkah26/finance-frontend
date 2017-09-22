@@ -9,22 +9,13 @@
 
   .dashboard-content-container {
     padding-top: 1em !important;
-    // Used to prevent horizontal scroll bar triggered on vertical scroll bar
-    // @media (max-width: $responsive_breakpoint) {
-    //   padding-right: 7px !important;
-    // }
+    padding-bottom: 0em !important;
 
     @media (min-width: $responsive_breakpoint) {
       // Scroll dashboard content
       max-height: calc(100vh - 11rem);
       overflow-y: auto;
     }
-
-    // > .ui.stackable.divided.two.column.grid {
-    //   > .column {
-    //     padding-bottom: 0 !important;
-    //   }
-    // }
 
     .buy-stock-container {
       overflow-x: hidden;
