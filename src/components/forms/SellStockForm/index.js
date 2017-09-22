@@ -86,7 +86,7 @@ class SellStockForm extends Component {
     const sellStockContainsError = sellStockErrorMessage.length > 0;
 
     return (
-      <Grid stackable columns={2} divided>
+      <Grid stackable columns={2} divided className="sell-stock-container">
         <Grid.Column>
           <Header size="medium">Stock to sell</Header>
           <Dropdown
@@ -98,19 +98,21 @@ class SellStockForm extends Component {
             onChange={this.handleStockSelection}
           />
           <br />
-          {selectedStock &&
+          {selectedStock && (
             <SellSharesForm
               containsError={sellStockContainsError}
               onSubmit={handleSubmit(this.handleSellSharesFormSubmit)}
               inputFields={inputFields}
               isLoading={isLoading}
               errorMessage={sellStockErrorMessage}
-            />}
+            />
+          )}
         </Grid.Column>
         <Grid.Column>
           <Header size="medium">Selected Stock Info</Header>
-          {selectedStock &&
-            <SelectedStockInfoList selectedStock={selectedStock} />}
+          {selectedStock && (
+            <SelectedStockInfoList selectedStock={selectedStock} />
+          )}
         </Grid.Column>
       </Grid>
     );

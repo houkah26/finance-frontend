@@ -2,9 +2,10 @@ import React from "react";
 
 import Routes from "../pages/Routes";
 
-const MainContent = () =>
-  <div className="layout-main-content">
+const MainContent = ({ className }) => (
+  <div className={className}>
     <Routes />
-  </div>;
+  </div>
+);
 
 export default MainContent;

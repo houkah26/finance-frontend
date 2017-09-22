@@ -9,19 +9,22 @@ import { RESPONSIVE_LIMIT } from "../../../constants";
 
 import "./index.css";
 
-const Dashboard = () =>
+const Dashboard = () => (
   <div className="dashboard-container">
     <NavMenu responsiveLimit={RESPONSIVE_LIMIT} />
     <MediaQuery minWidth={RESPONSIVE_LIMIT}>
       {matches =>
-        matches
-          ? <Segment attached="bottom">
-              <Routes />
-            </Segment>
-          : <Segment vertical className="dashboard-content-container">
-              <Routes />
-            </Segment>}
+        matches ? (
+          <Segment attached="bottom" className="dashboard-content-container">
+            <Routes />
+          </Segment>
+        ) : (
+          <Segment vertical className="dashboard-content-container">
+            <Routes />
+          </Segment>
+        )}
     </MediaQuery>
-  </div>;
+  </div>
+);
 
 export default Dashboard;

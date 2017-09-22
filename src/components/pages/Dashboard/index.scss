@@ -2,25 +2,37 @@
 
 .dashboard-container {
   @media (min-width: $responsive_breakpoint) {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    // To match bottom segments corners
+    border-radius: 0 0 0.28571429rem 0.28571429rem;
   }
 
-  > .dashboard-content-container {
-    // overflow-x: auto;
+  .dashboard-content-container {
     padding-top: 1em !important;
     // Used to prevent horizontal scroll bar triggered on vertical scroll bar
-    @media (max-width: $responsive_breakpoint) {
-      padding-right: 7px !important; 
+    // @media (max-width: $responsive_breakpoint) {
+    //   padding-right: 7px !important;
+    // }
+
+    @media (min-width: $responsive_breakpoint) {
+      // Scroll dashboard content
+      max-height: calc(100vh - 11rem);
+      overflow-y: auto;
     }
 
-    > .ui.stackable.divided.two.column.grid {
-      > .column {
-        padding-bottom: 0 !important;
-      }
-    }
+    // > .ui.stackable.divided.two.column.grid {
+    //   > .column {
+    //     padding-bottom: 0 !important;
+    //   }
+    // }
 
-    > .buy-stock-container {
+    .buy-stock-container {
       overflow-x: hidden;
+    }
+
+    .sell-stock-container {
+      // To account for height after stock is selected
+      height: 18rem;
     }
   }
 }

@@ -6,11 +6,14 @@ import Footer from "./Footer";
 
 import "./index.css";
 
-const Layout = () =>
+const Layout = () => (
   <div className="layout-container">
-    <Header />
-    <MainContent />
-    <Footer />
-  </div>;
+    <Header className="layout-header" />
+    <div className="layout-main-container">
+      <MainContent className="layout-main-content" />
+      <Footer className="layout-footer" />
+    </div>
+  </div>
+);
 
 export default Layout;

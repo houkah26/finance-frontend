@@ -1,25 +1,28 @@
 import React from "react";
-import { Header } from "semantic-ui-react";
 
-const NewTabLink = ({ url, children }) =>
+const NewTabLink = ({ url, children }) => (
   <a href={url} target="_blank" rel="noopener noreferrer">
     {children}
-  </a>;
+  </a>
+);
 
-const Footer = () =>
-  <div className="layout-footer">
-    <Header size="small" textAlign="center">
+const Footer = ({ className }) => (
+  <footer className={className}>
+    <span>
       Brought to you by{" "}
-      <NewTabLink url="https://github.com/houkah26">Austin Houk </NewTabLink> |
+      <NewTabLink url="https://github.com/houkah26">Austin Houk </NewTabLink>
+    </span>
+    <span>
       Code:{" "}
       <NewTabLink url="https://github.com/houkah26/finance-frontend">
         Front-End
-      </NewTabLink>
-      ,{" "}
+      </NewTabLink>{" "}
+      |{" "}
       <NewTabLink url="https://github.com/houkah26/finance-backend">
         Back-End
       </NewTabLink>
-    </Header>
-  </div>;
+    </span>
+  </footer>
+);
 
 export default Footer;

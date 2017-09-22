@@ -1,29 +1,38 @@
+@import "../../_variables.scss";
+
 .layout-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
+  background-color: rgb(237, 238, 240);
+  width: 100vw;
+  height: 100vh;
 
-  > .layout-header {
-    flex-shrink: 0;
-    padding-bottom: 1em;
+  .layout-header {
+    height: #{$headerHeight};
   }
 
-  > .layout-main-content {
-    max-width: 1000px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-right: 1em;
-    padding-left: 1em;
-    flex-grow: 1;
+  .layout-main-container {
+    height: calc(100vh - #{$headerHeight});
     overflow-y: auto;
-    min-height: 2em;
-  }
 
-  > .layout-footer {
-    flex-shrink: 0;
-    padding-top: 0.75em;
+    .layout-main-content {
+      max-width: rem-calc(1000px);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0.75rem;
+      overflow-y: auto;
+      min-height: calc(100vh - #{$headerHeight} - #{$footerHeight});
+    }
+
+    .layout-footer {
+      height: #{$footerHeight};
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+
+      span {
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+    }
   }
 }
