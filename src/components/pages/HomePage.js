@@ -40,6 +40,7 @@ const HomePage = ({ authenticated, changeRoute }) => (
         <li>Time series stock charts, data via Alpha Vantage API</li>
         <li>User info page which also shows trading performance (net gain)</li>
         <li>Responsive layout</li>
+        <li>Progressive Web App</li>
       </ul>
     </div>
     <div>

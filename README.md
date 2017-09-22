@@ -14,6 +14,7 @@ Stock trading simulator where authenticated users can quote, buy, and stock base
 * Time series stock charts (data via Tradier API)
 * Add funds/cash
 * User info page which also shows trading performance (net gain)
+* Progressive Web App
 
 ## Technologies
 * Framework: React
