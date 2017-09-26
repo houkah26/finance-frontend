@@ -1,0 +1,8 @@
+.sell-stock-dropdown {
+  /*Limit dropdown height so menu doesn't overflow container 
+  when user contains numerous stock
+  Overrides semantics height limit which is based on screen */
+  .menu {
+    max-height: 11.5rem !important;
+  }
+}

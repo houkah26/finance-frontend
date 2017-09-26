@@ -11,10 +11,12 @@ import { clearAuthErrors } from "../../../actions/auth";
 import SelectedStockInfoList from "./SelectedStockInfoList";
 import SellSharesForm from "./SellSharesForm";
 
+import "./index.css";
+
 // Input fields to render
 const inputFields = [{ name: "numberOfShares", type: "number" }];
 
-// Form validationg for redux-form
+// Form validation for redux-form
 const validate = (formProps, props) => {
   const errors = {};
 
@@ -96,6 +98,7 @@ class SellStockForm extends Component {
             fluid
             options={stockDropdownOptions}
             onChange={this.handleStockSelection}
+            className="sell-stock-dropdown"
           />
           <br />
           {selectedStock && (
