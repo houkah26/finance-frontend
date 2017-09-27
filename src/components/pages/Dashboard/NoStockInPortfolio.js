@@ -4,6 +4,10 @@ import { Header, Button } from "semantic-ui-react";
 
 import { changeRoute } from "../../../actions/routing";
 
+const divStyle = {
+  padding: '1rem'
+}
+
 class NoStockInPortfolio extends Component {
   handleClick = () => {
     this.props.changeRoute("/dashboard/buy-stock");
@@ -11,7 +15,7 @@ class NoStockInPortfolio extends Component {
 
   render() {
     return (
-      <div>
+      <div style={divStyle}>
         <Header size="medium">
           You currently have no stock in your portfolio.
         </Header>
