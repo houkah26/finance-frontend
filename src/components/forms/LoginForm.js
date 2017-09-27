@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
-import { Form, Message, Icon } from "semantic-ui-react";
+import { Form, Icon } from "semantic-ui-react";
 
 import { loginUser, clearAuthErrors } from "../../actions/auth";
-
 import renderFields from "./components/renderFields";
+import DismissibleMessage from "../message/DismissibleMessage";
 
 // Input fields to render
 const inputFields = [
@@ -13,7 +13,7 @@ const inputFields = [
   { name: "password", type: "password" }
 ];
 
-// Form validationg for redux-form
+// Form validation for redux-form
 const validate = formProps => {
   const errors = {};
 
@@ -43,10 +43,15 @@ class Login extends Component {
 
     return (
       <Form
+        // Controls display of messages with error property
         error={containsError}
         onSubmit={handleSubmit(this.handleFormSubmit)}
       >
-        <Message error header="Error:" content={errorMessage} />
+        <DismissibleMessage
+          header="Welcome!"
+          content="For your convenience you may log in to a test account (username: test, password: test) or go ahead and register."
+        />
+        <DismissibleMessage error header="Error:" content={errorMessage} />
         {renderFields(inputFields)}
         <Form.Button loading={isLoading}>
           <Icon name="sign in" />Login
