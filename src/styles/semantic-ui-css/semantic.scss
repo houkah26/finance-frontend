@@ -28074,9 +28074,10 @@ a.ui.card:hover,
   max-width: 100%;
 }
 
+// Sub-accordian // *altered*
 .ui.accordion .accordion {
-  margin: 1em 0em 0em;
-  padding: 0em;
+  margin-top: -0.5em; // *altered*
+  padding-left: 1.5em; // *altered*
 }
 
 /* Title */
