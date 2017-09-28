@@ -23,11 +23,6 @@
     .ui.grid {
       margin: 0;
     }
-    // Reduce top and bottom padding from semantic ui grid columns
-    .column {
-      padding-top: 1rem !important !important;
-      padding-bottom: 1rem !important !important;
-    }
 
     .buy-stock-container {
       overflow-x: hidden;
