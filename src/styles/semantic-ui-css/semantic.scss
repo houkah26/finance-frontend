@@ -18712,8 +18712,8 @@ ol.ui.horizontal.list li:before,
 /* Vertical padding when no rows */
 
 .ui.grid > .column:not(.row) {
-  padding-top: 0.5rem; // *altered*
-  padding-bottom: 0.5rem; // *altered*
+  padding-top: 1rem; // *altered*
+  padding-bottom: 1rem; // *altered*
 }
 
 .ui.grid > .row > .column {
@@ -20705,8 +20705,8 @@ ol.ui.horizontal.list li:before,
   .ui.stackable.divided:not(.vertically).grid > .row > .column {
     border-top: 1px solid rgba(34, 36, 38, 0.15);
     box-shadow: none !important;
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
+    padding-top: 1rem !important; // *altered*
+    padding-bottom: 1rem !important; // *altered*
   }
 
   .ui.stackable.celled.grid > .row {
