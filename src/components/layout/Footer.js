@@ -1,10 +1,6 @@
 import React from "react";
 
-const NewTabLink = ({ url, children }) => (
-  <a href={url} target="_blank" rel="noopener noreferrer">
-    {children}
-  </a>
-);
+import NewTabLink from "../util/NewTabLink";
 
 const Footer = ({ className }) => (
   <footer className={className}>
