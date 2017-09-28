@@ -21,6 +21,10 @@ const ulStyle = {
 };
 
 const HomePageAccordion = ({ isMobileRes }) => {
+  // Index's of panels to display by default
+  // Display all on large screens, collapse all on mobile
+  const defaultActiveIndex = isMobileRes ? [] : [0, 1];
+
   // Accordion panels
   const technologiesSubPanels = [
     {
@@ -102,7 +106,7 @@ const HomePageAccordion = ({ isMobileRes }) => {
         content: (
           <Accordion.Accordion
             panels={technologiesSubPanels}
-            defaultActiveIndex={isMobileRes ? false : [0, 1]}
+            defaultActiveIndex={defaultActiveIndex}
             exclusive={isMobileRes}
           />
         ),
@@ -114,7 +118,7 @@ const HomePageAccordion = ({ isMobileRes }) => {
   return (
     <Accordion
       panels={mainPanels}
-      defaultActiveIndex={isMobileRes ? false : [0, 1]}
+      defaultActiveIndex={defaultActiveIndex}
       exclusive={isMobileRes}
       fluid
     />
