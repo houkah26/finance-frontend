@@ -1,14 +1,12 @@
+$moneyGreen: #309234;
+
 .dashboard-nav-container {
   // Styles for nav bav menu at large screens
   &.nav-bar {
-    background-color: rgba(34, 36, 38, .15) !important;
+    background-color: rgba(34, 36, 38, 0.15) !important;
 
     > .item {
       font-weight: bolder !important;
-    }
-
-    > .item.header {
-      text-decoration: underline !important;
     }
 
     > .item.active {
@@ -31,6 +29,15 @@
         font-size: 1.1em;
         font-weight: bolder;
       }
+    }
+  }
+
+  &.nav-bar,
+  &.nav-dropdown {
+    // For Displaying funds
+    > .item.header {
+      text-decoration: underline !important;
+      color: $moneyGreen !important;
     }
   }
 }
