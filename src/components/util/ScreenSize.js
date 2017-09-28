@@ -6,7 +6,7 @@ export default class ScreenSize extends Component {
     children: PropTypes.func.isRequired
   };
 
-  state = { width: "0", height: "0" };
+  state = { width: null, height: null };
 
   componentDidMount() {
     this.updateWindowDimensions();
@@ -22,6 +22,9 @@ export default class ScreenSize extends Component {
   };
 
   render() {
-    return <div>{this.props.children(this.state)}</div>;
+    const { width } = this.state;
+
+    // Render components once width has been set
+    return width ? <div>{this.props.children(this.state)}</div> : null;
   }
 }
