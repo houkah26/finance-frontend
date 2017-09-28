@@ -6,7 +6,7 @@ import store, { history } from "../../store";
 
 import MainAuthContainer from "../../components/auth/MainAuthContainer";
 
-import "semantic-ui-css/semantic.min.css";
+import "../../styles/semantic-ui-css/semantic.css";
 import "./App.css";
 
 class App extends Component {
