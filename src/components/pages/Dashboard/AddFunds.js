@@ -3,8 +3,9 @@ import React from "react";
 import AddFundForm from "../../forms/AddFundForm";
 
 const divStyles = {
-  maxWidth: "300px",
-  margin: "0 auto"
+  maxWidth: "16rem",
+  margin: "0 auto",
+  padding: "0.8rem"
 };
 
 const AddFunds = () => (
