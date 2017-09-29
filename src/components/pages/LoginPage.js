@@ -3,12 +3,13 @@ import LoginForm from "../forms/LoginForm";
 
 const divStyles = {
   maxWidth: "300px",
-  margin: "0 auto"
+  margin: "1rem auto 0 auto"
 };
 
-const LoginPage = () =>
+const LoginPage = () => (
   <div style={divStyles}>
     <LoginForm />
-  </div>;
+  </div>
+);
 
 export default LoginPage;
