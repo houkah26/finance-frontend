@@ -62,13 +62,6 @@ class ChartContainer extends Component {
       chartDataErrorMessage.length > 0 &&
       quoteErrorMessage !== "Invalid stock symbol";
 
-    if (chartData.length > 0) {
-      console.log("data before", chartData);
-      console.log(
-        formatChartDataByDisplayType(chartData, selectedChartDisplayType)
-      );
-    }
-
     return (
       <div className="chart-container">
         {quoteName &&
