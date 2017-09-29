@@ -1,27 +1,14 @@
 import React from "react";
 import { Accordion } from "semantic-ui-react";
-import NewTabLink from "../../util/NewTabLink";
+import NewTabLink from "../../../util/NewTabLink";
 // import PropTypes from "prop-types"; !!TO_DO!!
+
+import "./index.css";
 
 // Semantic-UI Accordion
 // https://react.semantic-ui.com/modules/accordion#accordion-example-exclusive
 
-// Styles
-const accordionHeadingStyle = {
-  fontSize: "1.3rem",
-  fontWeight: "bold"
-};
-
-const accordionSubHeadingStyle = {
-  ...accordionHeadingStyle,
-  fontSize: "1.1rem"
-};
-
-const ulStyle = {
-  margin: "0"
-};
-
-const HomePageAccordion = ({ isMobileRes }) => {
+const HomePageAccordion = ({ isMobileRes, className = "" }) => {
   // Index's of panels to display by default
   // Display all on large screens, collapse all on mobile
   const defaultActiveIndex = isMobileRes ? [] : [0, 1];
@@ -30,12 +17,16 @@ const HomePageAccordion = ({ isMobileRes }) => {
   const technologiesSubPanels = [
     {
       title: {
-        content: <span style={accordionSubHeadingStyle}>Front-End</span>,
+        content: (
+          <span className="Accordion__Heading Accordion__Heading--sub">
+            Front-End
+          </span>
+        ),
         key: "title-21"
       },
       content: {
         content: (
-          <ul style={ulStyle}>
+          <ul className="Accordion__List">
             <li>Framework: React</li>
             <li>State management: Redux</li>
             <li>UI: Semantic-UI</li>
@@ -52,12 +43,16 @@ const HomePageAccordion = ({ isMobileRes }) => {
     },
     {
       title: {
-        content: <span style={accordionSubHeadingStyle}>Back-End</span>,
+        content: (
+          <span className="Accordion__Heading Accordion__Heading--sub">
+            Back-End
+          </span>
+        ),
         key: "title-22"
       },
       content: {
         content: (
-          <ul style={ulStyle}>
+          <ul className="Accordion__List">
             <li>Language: Node-JS</li>
             <li>Framework: Express</li>
             <li>Database: MongoDB and Mongoose (for express integration)</li>
@@ -73,12 +68,12 @@ const HomePageAccordion = ({ isMobileRes }) => {
   const mainPanels = [
     {
       title: {
-        content: <span style={accordionHeadingStyle}>Features</span>,
+        content: <span className="Accordion__Heading">Features</span>,
         key: "title-1"
       },
       content: {
         content: (
-          <ul style={ulStyle}>
+          <ul className="Accordion__List">
             <li>User Authentication utilizing JSON Web Tokens</li>
             <li>
               Real time (15 minute delay) stock prices via a Yahoo API from the
@@ -100,7 +95,7 @@ const HomePageAccordion = ({ isMobileRes }) => {
     },
     {
       title: {
-        content: <span style={accordionHeadingStyle}>Technologies</span>,
+        content: <span className="Accordion__Heading">Technologies</span>,
         key: "title-2"
       },
       content: {
@@ -118,13 +113,13 @@ const HomePageAccordion = ({ isMobileRes }) => {
 
   const sourceCodeLinkPanel = {
     title: {
-      content: <span style={accordionHeadingStyle}>Links to Source Code</span>,
+      content: <span className="Accordion__Heading">Links to Source Code</span>,
       key: "title-3"
     },
     content: {
       content: (
-        <ul style={{ ...ulStyle, fontSize: "1.1rem" }}>
-          <li style={{ paddingBottom: "1rem" }}>
+        <ul className="Accordion__List Accordion__List--link">
+          <li>
             <NewTabLink url="https://github.com/houkah26/finance-frontend">
               Front-End
             </NewTabLink>
@@ -145,6 +140,7 @@ const HomePageAccordion = ({ isMobileRes }) => {
 
   return (
     <Accordion
+      className={"Accordion " + className}
       panels={mainPanels}
       defaultActiveIndex={defaultActiveIndex}
       exclusive={isMobileRes}

@@ -6,22 +6,18 @@ import PropTypes from "prop-types";
 import ScreenSize from "../../util/ScreenSize";
 import HomePageButtonsAtMobileRes from "./HomePageButtonsAtMobileRes";
 import HomePageAccordion from "./HomePageAccordion";
-import HomePageLinks from "./HomePageLinks";
 
 import { changeRoute } from "../../../actions/routing";
 import { RESPONSIVE_LIMIT } from "../../../constants";
 
-const divStyle = {
-  maxWidth: "720px",
-  margin: "0 auto"
-};
+import "./index.css";
 
 const HomePage = ({ authenticated, changeRoute }) => (
   <ScreenSize>
     {screenSize => {
       const isMobileRes = screenSize.width < RESPONSIVE_LIMIT;
       return (
-        <div style={divStyle}>
+        <div className="HomePage">
           <Header size="large">Welcome to React Finance</Header>
           <p>
             Stock trading simulator where authenticated users can quote, buy,
@@ -31,12 +27,15 @@ const HomePage = ({ authenticated, changeRoute }) => (
             front-end ecosystem. See {isMobileRes ? "below" : "footer"} for
             links to source code.
           </p>
+          <HomePageAccordion
+            className="HomePage__Accordion"
+            isMobileRes={isMobileRes}
+          />
           <HomePageButtonsAtMobileRes
+            className="HomePage__Buttons"
             authenticated={authenticated}
             changeRoute={changeRoute}
           />
-          <HomePageAccordion isMobileRes={isMobileRes} />
-          {isMobileRes && <HomePageLinks />}
         </div>
       );
     }}

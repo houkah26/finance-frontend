@@ -1,0 +1,22 @@
+.Accordion {
+  &__Heading {
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    &--sub {
+      font-size: 1.1rem;
+    }
+  }
+
+  &__List {
+    margin: 0;
+
+    &--link {
+      font-size: 1.1rem;
+
+      li:first-child {
+        padding-bottom: 1rem;
+      }
+    }
+  }
+}
