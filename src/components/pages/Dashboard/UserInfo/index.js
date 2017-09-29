@@ -32,7 +32,7 @@ class UserInfoContainer extends Component {
     const startingFunds = 1000;
     const netGain = cash + totalValue - (startingFunds + cashAdded);
     const joinedDate = moment(joined).format("MMMM Do, YYYY");
-    const updatedTime = moment(updatedAt).format("LT, MMMM Do, YYYY");
+    const updatedTime = moment(updatedAt).format("M/D/YY, LT");
 
     return (
       <Grid stackable columns={2} divided className="user-info-container">
