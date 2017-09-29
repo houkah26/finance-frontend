@@ -7,6 +7,7 @@
 
   .layout-header {
     height: #{$headerHeight};
+    box-shadow: 0px 4px 3px rgba(169, 169, 169, 0.7);
   }
 
   .layout-main-container {
@@ -30,6 +31,9 @@
       display: none;
 
       @media (min-width: $responsive_breakpoint) {
+        box-shadow: 0px -4px 3px rgba(169, 169, 169, 0.7);
+        background-color: #1b1c1d;
+        color: #d4d4d4;
         height: #{$footerHeight};
         display: flex;
         justify-content: center;
