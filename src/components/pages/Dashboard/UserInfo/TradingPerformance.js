@@ -7,7 +7,7 @@ const TradingPerformance = ({
   startingFunds,
   totalValue,
   netGain
-}) =>
+}) => (
   <Grid.Column>
     <Header dividing size="medium">
       Trading Performance
@@ -31,9 +31,12 @@ const TradingPerformance = ({
       </List.Item>
       <List.Item>
         <List.Header>Net Gain</List.Header>
-        {`$${netGain.toFixed(2)}`}
+        <span style={{ color: netGain >= 0 ? "green" : "red" }}>
+          {`$${netGain.toFixed(2)}`}
+        </span>
       </List.Item>
     </List>
-  </Grid.Column>;
+  </Grid.Column>
+);
 
 export default TradingPerformance;
