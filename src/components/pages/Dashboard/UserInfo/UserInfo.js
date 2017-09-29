@@ -1,7 +1,7 @@
 import React from "react";
 import { Header, List, Grid } from "semantic-ui-react";
 
-const TradingPerformance = ({
+const UserInfo = ({
   username,
   firstName,
   lastName,
@@ -37,4 +37,4 @@ const TradingPerformance = ({
   </Grid.Column>
 );
 
-export default TradingPerformance;
+export default UserInfo;
