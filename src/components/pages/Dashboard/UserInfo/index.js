@@ -20,10 +20,19 @@ class UserInfoContainer extends Component {
 
   render() {
     const { totalValue, user } = this.props;
-    const { firstName, lastName, username, joined, cash, cashAdded } = user;
+    const {
+      firstName,
+      lastName,
+      username,
+      joined,
+      cash,
+      cashAdded,
+      updatedAt
+    } = user;
     const startingFunds = 1000;
     const netGain = cash + totalValue - (startingFunds + cashAdded);
     const joinedDate = moment(joined).format("MMMM Do, YYYY");
+    const updatedTime = moment(updatedAt).format("LT, MMMM Do, YYYY");
 
     return (
       <Grid stackable columns={2} divided className="user-info-container">
@@ -32,6 +41,7 @@ class UserInfoContainer extends Component {
           firstName={firstName}
           lastName={lastName}
           joinedDate={joinedDate}
+          updatedTime={updatedTime}
         />
         <TradingPerformance
           cash={cash}

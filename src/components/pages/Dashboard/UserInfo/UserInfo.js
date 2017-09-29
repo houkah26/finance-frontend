@@ -1,7 +1,13 @@
 import React from "react";
 import { Header, List, Grid } from "semantic-ui-react";
 
-const TradingPerformance = ({ username, firstName, lastName, joinedDate }) =>
+const TradingPerformance = ({
+  username,
+  firstName,
+  lastName,
+  joinedDate,
+  updatedTime
+}) => (
   <Grid.Column>
     <Header dividing size="medium">
       User Information
@@ -23,7 +29,12 @@ const TradingPerformance = ({ username, firstName, lastName, joinedDate }) =>
         <List.Header>Joined</List.Header>
         {joinedDate}
       </List.Item>
+      <List.Item>
+        <List.Header>Last Activity</List.Header>
+        {updatedTime}
+      </List.Item>
     </List>
-  </Grid.Column>;
+  </Grid.Column>
+);
 
 export default TradingPerformance;
