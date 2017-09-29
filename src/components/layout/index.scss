@@ -32,14 +32,22 @@
       @media (min-width: $responsive_breakpoint) {
         height: #{$footerHeight};
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        padding: 0 0.5rem;
 
-        span {
+        > span {
           font-size: 1.1rem;
           font-weight: bold;
+
+          // Add 1rem padding between each span
+          padding: 0 0.5rem;
+          &:first-child {
+            padding-left: 0;
+          }
+          &:last-child {
+            padding-right: 0;
+          }
         }
       }
     }
