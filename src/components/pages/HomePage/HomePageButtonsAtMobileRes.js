@@ -6,9 +6,13 @@ import MediaQuery from "react-responsive";
 import { RESPONSIVE_LIMIT } from "../../../constants";
 
 // Login/Register/Dashboard buttons for mobile resolutions
-const HomePageButtonsAtMobileRes = ({ authenticated, changeRoute }) => (
+const HomePageButtonsAtMobileRes = ({
+  authenticated,
+  changeRoute,
+  className
+}) => (
   <MediaQuery maxWidth={RESPONSIVE_LIMIT}>
-    <div style={{ marginBottom: "1rem" }}>
+    <div className={className}>
       {authenticated ? (
         <Button fluid onClick={() => changeRoute("/dashboard")}>
           Go To Dashboard
