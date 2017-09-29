@@ -13,7 +13,7 @@ import { RESPONSIVE_LIMIT } from "../../../constants";
 import "./index.css";
 
 const HomePage = ({ authenticated, changeRoute }) => (
-  <ScreenSize>
+  <ScreenSize className="ScreenSizeContainer">
     {screenSize => {
       const isMobileRes = screenSize.width < RESPONSIVE_LIMIT;
       return (
