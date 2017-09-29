@@ -21,8 +21,8 @@ const HomePage = ({ authenticated, changeRoute }) => (
           <Header size="large">Welcome to React Finance</Header>
           <p>
             Stock trading simulator where authenticated users can quote, buy,
-            and stock based on real time stock data. This app was built using
-            Full-Stack JavaScript (Node, Express, MongoDB, and React) as a
+            and sell stock based on real time stock data. This app was built
+            using Full-Stack JavaScript (Node, Express, MongoDB, and React) as a
             personal project to become more familiar with the modern React
             front-end ecosystem. See {isMobileRes ? "below" : "footer"} for
             links to source code.
