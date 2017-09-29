@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 export default class ScreenSize extends Component {
+  static defaultProps = {
+    className: ""
+  };
+
   static propTypes = {
-    children: PropTypes.func.isRequired
+    children: PropTypes.func.isRequired,
+    className: PropTypes.string
   };
 
   state = { width: null, height: null };
@@ -23,8 +28,11 @@ export default class ScreenSize extends Component {
 
   render() {
     const { width } = this.state;
+    const { className, children } = this.props;
 
     // Render components once width has been set
-    return width ? <div>{this.props.children(this.state)}</div> : null;
+    return width ? (
+      <div className={className}>{children(this.state)}</div>
+    ) : null;
   }
 }
