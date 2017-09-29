@@ -1,5 +1,6 @@
 import React from "react";
 import { Accordion } from "semantic-ui-react";
+import NewTabLink from "../../util/NewTabLink";
 // import PropTypes from "prop-types"; !!TO_DO!!
 
 // Semantic-UI Accordion
@@ -86,7 +87,7 @@ const HomePageAccordion = ({ isMobileRes }) => {
             <li>Buy and sell stocks</li>
             <li>View sortable stock portfolio and transaction history</li>
             <li>Add funds/cash (no real money)</li>
-            <li>Time series stock charts, data via Alpha Vantage API</li>
+            <li>Time series stock charts, data via Tradier API</li>
             <li>
               User info page which also shows trading performance (net gain)
             </li>
@@ -114,6 +115,33 @@ const HomePageAccordion = ({ isMobileRes }) => {
       }
     }
   ];
+
+  const sourceCodeLinkPanel = {
+    title: {
+      content: <span style={accordionHeadingStyle}>Links to Source Code</span>,
+      key: "title-3"
+    },
+    content: {
+      content: (
+        <ul style={{ ...ulStyle, fontSize: "1.1rem" }}>
+          <li style={{ paddingBottom: "1rem" }}>
+            <NewTabLink url="https://github.com/houkah26/finance-frontend">
+              Front-End
+            </NewTabLink>
+          </li>
+          <li>
+            <NewTabLink url="https://github.com/houkah26/finance-backend">
+              Back-End
+            </NewTabLink>
+          </li>
+        </ul>
+      ),
+      key: "content-3"
+    }
+  };
+
+  // Include source code link panels with main panels at mobile-res
+  isMobileRes && mainPanels.push(sourceCodeLinkPanel);
 
   return (
     <Accordion
