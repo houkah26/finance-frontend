@@ -14,7 +14,7 @@ const HomePageButtonsAtMobileRes = ({
   <MediaQuery maxWidth={RESPONSIVE_LIMIT}>
     <div className={className}>
       {authenticated ? (
-        <Button fluid onClick={() => changeRoute("/dashboard")}>
+        <Button color="grey" fluid onClick={() => changeRoute("/dashboard")}>
           Go To Dashboard
         </Button>
       ) : (
